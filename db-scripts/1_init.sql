@@ -1,0 +1,6 @@
+CREATE USER IF NOT EXISTS 'ec'@'%' IDENTIFIED WITH mysql_native_password BY 'ec123';
+CREATE DATABASE IF NOT EXISTS ec DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+GRANT ALL PRIVILEGES ON ec.* TO 'ec'@'%';
+
+USE ec;
+
