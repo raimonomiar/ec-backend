@@ -18,10 +18,10 @@ const requestIdMiddleware = (req, res, next) => {
 const createApp = () => {
   const expressApp = express();
   expressApp.use(requestIdMiddleware);
-  //Todo - add logger
+  // Todo - add logger
   expressApp.use(express.json({ limit: '50mb' }));
-  expressApp.use(express.urlencoded({ 
-    extended: true, 
+  expressApp.use(express.urlencoded({
+    extended: true,
     limit: '50mb',
     parameterLimit: 50000,
   }));
@@ -29,7 +29,7 @@ const createApp = () => {
   expressApp.use(mung);
   expressApp.use(config.get('api.BASE_URI'), router);
 
-  if(config.get('constants.enableSwagger')) {
+  if (config.get('constants.enableSwagger')) {
     expressApp.use('/swagger.json', (req, res) => {
       res.send(swagger.load());
     });

@@ -1,15 +1,14 @@
 const ev = require('express-validation');
 const HttpStatusCode = require('http-status-codes');
 const { pathOr } = require('ramda');
-const exceptions = require('./exceptions');
 const { headers } = require('express-mung');
-//TODO - add logger
+const exceptions = require('./exceptions');
+// TODO - add logger
 
 const errorMessageMap = {
   400: 'Bad Request',
   406: 'Not Acceptable',
 };
-
 
 function addFieldErrorDetail(fields, errorDetail, messages) {
   const errorFieldDetail = errorDetail;
@@ -17,11 +16,9 @@ function addFieldErrorDetail(fields, errorDetail, messages) {
     return;
   }
   const field = fields.shift();
-  if (!errorFieldDetail[field]) 
-    errorFieldDetail[field] = {};
+  if (!errorFieldDetail[field]) { errorFieldDetail[field] = {}; }
   if (!fields.length) {
     errorFieldDetail[field] = messages.join(',');
-
   }
   addFieldErrorDetail(fields, errorFieldDetail[field], messages);
 }
@@ -34,14 +31,14 @@ function generateErrorResponse(validationError) {
   if (validationError.errors && validationError.errors.length) {
     const errorDetails = error.details;
     validationError.errors.forEach((errorDetail) => {
-      if(!errorDetails[errorDetail.location]) {
+      if (!errorDetails[errorDetail.location]) {
         errorDetails[errorDetail.location] = {};
       }
       addFieldErrorDetail(
         errorDetail.field, errorDetails[errorDetail.location], errorDetail.messages,
       );
     });
-    const headersObj = errorDetails.headers;;
+    const headersObj = errorDetails.headers;
     if (headersObj !== null) {
       if (Object.keys(headersObj).length === 1
         && Object.keys(headersObj).includes('userId')) {
@@ -71,17 +68,17 @@ function httpError() {
     let error = {};
     let statusCode = '';
     if (err instanceof ev.ValidationError) {
-      //TODO logger
+      // TODO logger
       error = generateErrorResponse(err);
     } else if (err instanceof exceptions.AppError) {
-      //TODO logger
+      // TODO logger
       error = {
         errorCode: err.status,
         message: err.message,
       };
     } else if (err && err.error && err.error.isJoi) {
-      //TODO logger
-      const code = err.type === 'headers' ? HttpStatusCode.NOT_ACCEPTABLE 
+      // TODO logger
+      const code = err.type === 'headers' ? HttpStatusCode.NOT_ACCEPTABLE
         : HttpStatusCode.BAD_REQUEST;
       error = {
         errorCode: code,
@@ -94,7 +91,7 @@ function httpError() {
         });
       }
     } else {
-      //TODO logger
+      // TODO logger
       error = {
         errorCode: HttpStatusCode.INTERNAL_SERVER_ERROR,
         message: 'INTERNAL_SERVER_ERROR',

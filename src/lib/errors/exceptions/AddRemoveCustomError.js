@@ -1,4 +1,5 @@
 const AppError = require('./AppError');
+
 const ADD_REMOVE_CUSTOM_ERROR = 'Error adding or removing item';
 
 module.exports = class AddRemoveCustomError extends AppError {
@@ -8,4 +9,4 @@ module.exports = class AddRemoveCustomError extends AppError {
     Error.captureStackTrace(this, this.constructor);
     this.errorArray = errorArray;
   }
-}
+};
