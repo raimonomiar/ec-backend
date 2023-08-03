@@ -1,0 +1,19 @@
+components:
+  schemas:
+    checkHealth:
+      type: string
+paths:
+  /health:
+    get:
+      tags:
+        - health
+      summary: Check if the service is up
+      description: Return the message of service started
+      responses:
+        '200':
+          description: Request processed successfully!
+          content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/checkHealth'
+
