@@ -2,7 +2,7 @@ require('dotenv').config();
 const config = require('config');
 const dbs = require('./db');
 const app = require('./app/app');
-// TODO - add logger
+const logger = require('./lib/logger');
 
 process.env.ROOTDIR = __dirname;
 let serverInstance;
@@ -16,8 +16,7 @@ async function closeResource() {
 
 const terminateServer = async (err) => {
   if (err) {
-    // TODO - add logger
-    console.log(err);
+    logger.error(err);
   }
   await closeResource();
   process.nextTick(() => process.exit(1));
@@ -25,32 +24,31 @@ const terminateServer = async (err) => {
 
 const uncaughtExceptionHandler = async (err) => {
   process.removeListener('uncaughtException', uncaughtExceptionHandler);
-  // TODO - add logger
+  logger.error(err);
   terminateServer(err);
 };
 
 const unhandledRejectionHandler = async (reason, p) => {
   process.removeListener('unhandledRejection', unhandledRejectionHandler);
-  // TODO - add logger
+  logger.error(err);
   terminateServer();
 };
 
 const startServer = async () => {
-  // TODO - add logger
+  logger.debug('Starting Server');
   dbs.mysql.checkConnection();
-  // TODO - add logger
+  logger.debug('DB Connected');
   const appInstance = app.createApp();
   const port = config.get('env.port');
-  // TODO - add logger
+  logger.debug('Listening Now');
   serverInstance = appInstance.listen(port, () => {
-    // TODO - add logger
-    console.log(`Server started on port ${port}`);
+    logger.debug(`Server is up and running on port: ${port}`);
   });
 };
 
 startServer()
   .then(() => {
-    // TODO - add logger
+    logger.debug('Server up successful');
   })
   .catch((err) => { terminateServer(err); });
 

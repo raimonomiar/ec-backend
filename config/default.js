@@ -14,8 +14,8 @@ module.exports = {
     mode: process.env.NODE_ENV || 'development',
     host: process.env.HOST || 'localhost',
     port: process.env.PORT || 4200,
-    swaggerAPIURL: process.env.SWAGGER_API_URL
-      || defer((cfg) => `{scheme}://${cfg.env.host}:${cfg.env.port}${cfg.api.BASE_URI}`),
+    swaggerAPIURL: process.env.SWAGGER_API_URL ? defer((cfg) => `{scheme}://${process.env.SWAGGER_API_URL}${cfg.api.BASE_URI}`)
+      : defer((cfg) => `{scheme}://${cfg.env.host}:${cfg.env.port}${cfg.api.BASE_URI}`),
 	},
   db: {
     mysql: {
@@ -36,4 +36,9 @@ module.exports = {
   constants: {
     enableSwagger: true,
 	},
+  logger: {
+    APP_LOG_PATH: process.env.APP_LOG_PATH || 'default.log',
+    LOG_LEVEL: process.env.LOG_LEVEL || 'info',
+    TIME_FORMAT: process.env.TIME_FORMAT || 'YYYY-MM-DD HH:mm:ss',
+  },
 };
