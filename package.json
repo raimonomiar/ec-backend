@@ -45,7 +45,8 @@
     "ramda": "^0.27.1",
     "standard-http-error": "^2.0.1",
     "swagger-jsdoc": "^3.4.0",
-    "swagger-ui-express": "^4.0.2"
+    "swagger-ui-express": "^4.0.2",
+    "winston": "^3.10.0"
   },
   "devDependencies": {
     "eslint": "^7.4.0",

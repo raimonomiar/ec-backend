@@ -3,7 +3,7 @@ const HttpStatusCode = require('http-status-codes');
 const { pathOr } = require('ramda');
 const { headers } = require('express-mung');
 const exceptions = require('./exceptions');
-// TODO - add logger
+const logger = require('../logger');
 
 const errorMessageMap = {
   400: 'Bad Request',
@@ -68,16 +68,16 @@ function httpError() {
     let error = {};
     let statusCode = '';
     if (err instanceof ev.ValidationError) {
-      // TODO logger
+      logger.debug(err)
       error = generateErrorResponse(err);
     } else if (err instanceof exceptions.AppError) {
-      // TODO logger
+      logger.debug(err);
       error = {
         errorCode: err.status,
         message: err.message,
       };
     } else if (err && err.error && err.error.isJoi) {
-      // TODO logger
+      logger.debug(err);
       const code = err.type === 'headers' ? HttpStatusCode.NOT_ACCEPTABLE
         : HttpStatusCode.BAD_REQUEST;
       error = {
@@ -91,7 +91,6 @@ function httpError() {
         });
       }
     } else {
-      // TODO logger
       error = {
         errorCode: HttpStatusCode.INTERNAL_SERVER_ERROR,
         message: 'INTERNAL_SERVER_ERROR',
