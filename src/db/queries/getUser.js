@@ -2,8 +2,9 @@ const _ = require('lodash');
 
 const queryTemplate = `
   SELECT 
-    password_hash
-  FROM users WHERE email = <%= email %>`;
+    password_hash,
+    BIN_TO_UUID(user_id) as userId
+  FROM users WHERE email = '<%= email %>'`;
 
 const queryParamsGenerator = _.template(queryTemplate);
 
