@@ -9,7 +9,7 @@ const responseGenerator = async (req, res, next) => {
     const { body } = req;
     const { isValid, userId } = await userService.validatePassword(body);
     if (!isValid) {
-      res.status(HttpStatusCode.UNAUTHORIZED).send({
+      return res.status(HttpStatusCode.UNAUTHORIZED).send({
         error: {
           code: 'INVALID_CREDENTIALS',
           message: 'Invalid usernname or password.',

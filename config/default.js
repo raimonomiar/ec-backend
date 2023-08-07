@@ -42,4 +42,17 @@ module.exports = {
     LOG_LEVEL: process.env.LOG_LEVEL || 'info',
     TIME_FORMAT: process.env.TIME_FORMAT || 'YYYY-MM-DD HH:mm:ss',
   },
+  smtp: {
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
+    port: process.env.SMTP_PORT || 465,
+    secure: process.env.SMTP_SECURE !== 'false',
+    auth: {
+      user: process.env.SMTP_USER || '',
+      pass: process.env.SMTP_PASSWORD || '',
+    },
+    tls: {
+      minVersion: 'TLSv1',
+      rejectUnauthorized: false,
+    },
+  },
 };
