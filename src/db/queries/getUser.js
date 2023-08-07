@@ -1,10 +1,12 @@
 const _ = require('lodash');
+const { users } = require('../schema');
 
 const queryTemplate = `
   SELECT 
-    password_hash,
-    BIN_TO_UUID(user_id) as userId
-  FROM users WHERE email = '<%= email %>'`;
+    ${users.cols.email.colName},
+    BIN_TO_UUID(${users.cols.userId.colName}) as ${users.cols.userId.name},
+    ${users.cols.passwordHash.colName} as ${users.cols.passwordHash.name}
+  FROM ${users.table} WHERE ${users.cols.email.colName} = '<%= email %>'`;
 
 const queryParamsGenerator = _.template(queryTemplate);
 

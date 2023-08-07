@@ -4,6 +4,7 @@ const logger = require('../lib/logger');
 const {
   addUser,
   getUser,
+  updateUser,
 } = queries;
 
 const insertIntoUsersTable = async (queryParams) => {
@@ -11,7 +12,7 @@ const insertIntoUsersTable = async (queryParams) => {
     insertIntoUsersCmd,
     insertIntoUsersArgs,
   } = addUser.getQueryParamsForUsers(queryParams);
-  await mysql.pool.query(insertIntoUsersCmd, insertIntoUsersArgs);
+  mysql.pool.query(insertIntoUsersCmd, insertIntoUsersArgs);
 };
 
 const getUserByEmail = async (email) => {
@@ -19,7 +20,16 @@ const getUserByEmail = async (email) => {
   return mysql.pool.query(cmd, args);
 };
 
+const updatePassword = async (queryParams) => {
+  const {
+    cmd,
+    args,
+  } = updateUser.getQueryParamsForPassword(queryParams);
+  mysql.pool.query(cmd, args);
+};
+
 module.exports = {
   insertIntoUsersTable,
   getUserByEmail,
+  updatePassword,
 };
