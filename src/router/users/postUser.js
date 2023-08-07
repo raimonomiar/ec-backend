@@ -5,7 +5,7 @@ const responseGenerator = async (req, res, next) => {
   try {
     const { body } = req;
     await userService.addUser(body);
-    res.status(HttpStatusCode.OK).send();
+    res.status(HttpStatusCode.CREATED).send();
   } catch (error) {
     next(error);
   }
