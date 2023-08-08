@@ -5,6 +5,7 @@ module.exports = {
   app: {
     name: p.name,
     description: p.description,
+    uri: process.env.APP_URI || 'http://localhost:10000',
   },
   api: {
     ROOT_URI: '/api',
@@ -31,11 +32,12 @@ module.exports = {
       connectTimeout: 60 * 60 * 1000,
       acquireTimeout: 60 * 60 * 1000,
       timeout: 60 * 60 * 1000,
-      debug: true,
+      debug: false,
     },
   },
   constants: {
     enableSwagger: true,
+    saltRound: 10,
   },
   logger: {
     APP_LOG_PATH: process.env.APP_LOG_PATH || 'default.log',
@@ -54,5 +56,9 @@ module.exports = {
       minVersion: 'TLSv1',
       rejectUnauthorized: false,
     },
+  },
+  jwt: {
+    secretKey: process.env.JWT_PRIVATE_KEY || 'yoursecretkey',
+    expiresIn: process.env.JWT_EXPIRES_IN || '24h',
   },
 };

@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
+const {
+  saltRound,
+} = require('config').get('constants');
 const queryExecutor = require('../queryExecutor');
-
-const SALT = 10;
 
 async function addUser(input) {
   const {
@@ -19,7 +20,7 @@ async function addUser(input) {
     updatedBy,
   } = input;
 
-  const passwordHash = await bcrypt.hash(password, SALT);
+  const passwordHash = await bcrypt.hash(password, saltRound);
   const result = await queryExecutor.insertIntoUsersTable({
     email,
     firstName,
@@ -39,7 +40,7 @@ async function addUser(input) {
 
 async function updatePassword(input) {
   const { userId, password } = input;
-  const hashPassword = await bcrypt.hash(password, SALT);
+  const hashPassword = await bcrypt.hash(password, saltRound);
   await queryExecutor.updatePassword({
     userId, hashPassword,
   });
