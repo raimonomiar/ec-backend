@@ -7,7 +7,14 @@ const TOKEN_SECRET = 'asdasdasdasd';
 const responseGenerator = async (req, res, next) => {
   try {
     const { body } = req;
-    const { isValid, userId } = await userService.validatePassword(body);
+    const {
+      isValid,
+      userId,
+      email,
+      firstName,
+      lastName,
+    } = await userService.validatePassword(body);
+
     if (!isValid) {
       return res.status(HttpStatusCode.UNAUTHORIZED).send({
         error: {
@@ -17,7 +24,10 @@ const responseGenerator = async (req, res, next) => {
       });
     }
 
-    const authKey = jwt.sign({ userId }, TOKEN_SECRET);
+    const authKey = jwt.sign({
+      userId, email, firstName, lastName,
+    }, TOKEN_SECRET);
+
     res.status(HttpStatusCode.OK).send({ authKey });
   } catch (error) {
     next(error);
