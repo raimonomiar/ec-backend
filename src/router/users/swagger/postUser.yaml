@@ -1,0 +1,55 @@
+components:
+  schemas:
+    addUserRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        lastName:
+          type: string 
+      required:
+        - firstName
+        - password
+        - email
+        - lastName
+    addUserResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    errorSchema:
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+paths:
+  /users:
+    post:
+      tags:
+       - users
+      summary: Add User
+      description: Add User to the system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/addUserRequest'
+      responses:
+        '201':
+          description: Request processed successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addUserResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'

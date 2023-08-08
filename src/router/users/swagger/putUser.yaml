@@ -1,0 +1,51 @@
+components:
+  schemas:
+    updatePasswordRequest:
+      type: object
+      properties:
+        password:
+          type: string
+    updatePasswordResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    errorSchema:
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+paths:
+  /users/{userId}/password:
+    put:
+      tags:
+        - users
+      summary: Update Password
+      description: Update Password to the system
+      parameters:
+        - name: userId
+          in: path
+          description: User Id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updatePasswordRequest'
+      responses:
+        '204':
+          description: Request processed successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updatePasswordResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'

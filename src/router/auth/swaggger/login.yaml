@@ -1,0 +1,55 @@
+components:
+  schemas:
+    loginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - password
+    loginResponse:
+      type: object
+      properties:
+        authKey:
+          type: string
+    errorSchema:
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+paths:
+  /login:
+    post:
+      tags:
+       - auth
+      summary: Login
+      description: Login to the system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/loginRequest'
+      responses:
+        '200':
+          description: Request processed successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/loginResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema' 
