@@ -52,9 +52,13 @@ async function validatePassword(input) {
       userId: null,
     };
   }
+  const { userId, firstName, lastName } = row;
   return {
     isValid: await bcrypt.compare(password, row.passwordHash),
-    userId: row.userId,
+    userId,
+    firstName,
+    lastName,
+    email,
   };
 }
 
