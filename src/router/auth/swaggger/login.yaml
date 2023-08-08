@@ -3,7 +3,7 @@ components:
     loginRequest:
       type: object
       properties:
-        username:
+        email:
           type: string
         password:
           type: string
@@ -28,13 +28,12 @@ paths:
        - auth
       summary: Login
       description: Login to the system
-      parameters:
-        - name: loginRequest
-          in: body
-          description: Login request
-          required: true
-          schema:
-            $ref: '#/components/schemas/loginRequest'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/loginRequest'
       responses:
         '200':
           description: Request processed successfully!

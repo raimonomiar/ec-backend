@@ -17,7 +17,7 @@ components:
         code:
           type: string
 paths:
-  /{userId}/password:
+  /users/{userId}/password:
     put:
       tags:
         - users
@@ -30,12 +30,12 @@ paths:
           required: true
           schema:
             type: string
-        - name: updatePasswordRequest
-          in: body
-          description: Update Password request
-          required: true
-          schema:
-            $ref: '#/components/schemas/updatePasswordRequest'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updatePasswordRequest'
       responses:
         '204':
           description: Request processed successfully!

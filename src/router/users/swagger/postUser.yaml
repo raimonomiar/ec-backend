@@ -34,13 +34,12 @@ paths:
        - users
       summary: Add User
       description: Add User to the system
-      parameters:
-        - name: addUserRequest
-          in: body
-          description: Add User request
-          required: true
-          schema:
-            $ref: '#/components/schemas/addUserRequest'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/addUserRequest'
       responses:
         '201':
           description: Request processed successfully!
