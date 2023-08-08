@@ -1,5 +1,4 @@
 const { mysql, queries } = require('../db');
-const logger = require('../lib/logger');
 
 const {
   addUser,

@@ -1,5 +1,5 @@
-const p = require('../package.json');
 const defer = require('config/defer').deferConfig;
+const p = require('../package.json');
 
 module.exports = {
   app: {
@@ -9,14 +9,14 @@ module.exports = {
   api: {
     ROOT_URI: '/api',
     BASE_URI: defer((cfg) => `${cfg.api.ROOT_URI}/`),
-	},
+  },
   env: {
     mode: process.env.NODE_ENV || 'development',
     host: process.env.HOST || 'localhost',
     port: process.env.PORT || 4200,
     swaggerAPIURL: process.env.SWAGGER_API_URL ? defer((cfg) => `{scheme}://${process.env.SWAGGER_API_URL}${cfg.api.BASE_URI}`)
       : defer((cfg) => `{scheme}://${cfg.env.host}:${cfg.env.port}${cfg.api.BASE_URI}`),
-	},
+  },
   db: {
     mysql: {
       host: process.env.MYSQL_DB_SERVER || 'localhost',
@@ -32,11 +32,11 @@ module.exports = {
       acquireTimeout: 60 * 60 * 1000,
       timeout: 60 * 60 * 1000,
       debug: true,
-		},
-	},
+    },
+  },
   constants: {
     enableSwagger: true,
-	},
+  },
   logger: {
     APP_LOG_PATH: process.env.APP_LOG_PATH || 'default.log',
     LOG_LEVEL: process.env.LOG_LEVEL || 'info',

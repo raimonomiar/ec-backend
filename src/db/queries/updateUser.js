@@ -18,5 +18,5 @@ const getQueryParamsForPassword = ({ userId, hashPassword }) => {
   };
 };
 module.exports = {
-  getQueryParamsForPassword, 
+  getQueryParamsForPassword,
 };

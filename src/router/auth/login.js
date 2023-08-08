@@ -1,6 +1,6 @@
-const { userService } = require('../../services');
-const HttpStatusCode = require('http-status-codes');
 const jwt = require('jsonwebtoken');
+const HttpStatusCode = require('http-status-codes');
+const { userService } = require('../../services');
 
 const TOKEN_SECRET = 'asdasdasdasd';
 
@@ -8,11 +8,7 @@ const responseGenerator = async (req, res, next) => {
   try {
     const { body } = req;
     const {
-      isValid,
-      userId,
-      email,
-      firstName,
-      lastName,
+      isValid, userId, email, firstName, lastName,
     } = await userService.validatePassword(body);
 
     if (!isValid) {
@@ -28,9 +24,9 @@ const responseGenerator = async (req, res, next) => {
       userId, email, firstName, lastName,
     }, TOKEN_SECRET);
 
-    res.status(HttpStatusCode.OK).send({ authKey });
+    return res.status(HttpStatusCode.OK).send({ authKey });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 

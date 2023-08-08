@@ -1,5 +1,5 @@
-const { userService } = require('../../services');
 const HttpStatusCode = require('http-status-codes');
+const { userService } = require('../../services');
 
 const responseGenerator = async (req, res, next) => {
   try {
@@ -13,10 +13,10 @@ const responseGenerator = async (req, res, next) => {
 
 module.exports = [
   {
-  route: '/',
-  method: 'post',
-  middlewares: [
-    responseGenerator,
-  ],
- },
+    route: '/',
+    method: 'post',
+    middlewares: [
+      responseGenerator,
+    ],
+  },
 ];

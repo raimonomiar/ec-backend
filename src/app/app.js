@@ -18,7 +18,6 @@ const requestIdMiddleware = (req, res, next) => {
 const createApp = () => {
   const expressApp = express();
   expressApp.use(requestIdMiddleware);
-  // Todo - add logger
   expressApp.use(express.json({ limit: '50mb' }));
   expressApp.use(express.urlencoded({
     extended: true,

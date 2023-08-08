@@ -28,9 +28,9 @@ const uncaughtExceptionHandler = async (err) => {
   terminateServer(err);
 };
 
-const unhandledRejectionHandler = async (reason, p) => {
+const unhandledRejectionHandler = async (reason) => {
   process.removeListener('unhandledRejection', unhandledRejectionHandler);
-  logger.error(err);
+  logger.error(reason);
   terminateServer();
 };
 

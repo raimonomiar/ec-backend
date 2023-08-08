@@ -1,5 +1,5 @@
-const { userService } = require('../../services');
 const HttpStatusCode = require('http-status-codes');
+const { userService } = require('../../services');
 
 const updatePassword = async (req, res, next) => {
   try {
