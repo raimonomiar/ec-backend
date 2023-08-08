@@ -1,4 +1,4 @@
-const userService = require('./users.js');
+const userService = require('./users');
 
 module.exports = {
   userService,

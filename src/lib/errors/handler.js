@@ -1,7 +1,5 @@
 const ev = require('express-validation');
 const HttpStatusCode = require('http-status-codes');
-const { pathOr } = require('ramda');
-const { headers } = require('express-mung');
 const exceptions = require('./exceptions');
 const logger = require('../logger');
 
@@ -64,11 +62,11 @@ function notFoundError() {
 }
 
 function httpError() {
-  return (err, req, res, next) => {
+  return (err, req, res) => {
     let error = {};
     let statusCode = '';
     if (err instanceof ev.ValidationError) {
-      logger.debug(err)
+      logger.debug(err);
       error = generateErrorResponse(err);
     } else if (err instanceof exceptions.AppError) {
       logger.debug(err);

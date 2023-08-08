@@ -1,6 +1,6 @@
+const _ = require('lodash');
 const HttpStatusCode = require('http-status-codes');
 const { userService } = require('../../services');
-const _ = require('lodash');
 const mailer = require('../../lib/mailer');
 
 const emailTemplate = `
@@ -43,4 +43,3 @@ module.exports = [
     ],
   },
 ];
-

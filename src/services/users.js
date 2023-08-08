@@ -1,7 +1,3 @@
-const logger = require('../lib/logger');
-const _ = require('lodash');
-const { mysql, queries } = require('../db');
-const { AppError } = require('../lib/errors/exceptions');
 const bcrypt = require('bcrypt');
 const queryExecutor = require('../queryExecutor');
 
@@ -25,8 +21,18 @@ async function addUser(input) {
 
   const passwordHash = await bcrypt.hash(password, SALT);
   const result = await queryExecutor.insertIntoUsersTable({
-    email, firstName, lastName, passwordHash, street, zip, phone,
-    isAdmin, city, appartment, createdBy, updatedBy,
+    email,
+    firstName,
+    lastName,
+    passwordHash,
+    street,
+    zip,
+    phone,
+    isAdmin,
+    city,
+    appartment,
+    createdBy,
+    updatedBy,
   });
   return result;
 }
@@ -63,8 +69,8 @@ async function validatePassword(input) {
 }
 
 module.exports = {
- addUser, 
- validatePassword,
- getUserByEmail,
- updatePassword,
+  addUser,
+  validatePassword,
+  getUserByEmail,
+  updatePassword,
 };
