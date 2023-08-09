@@ -15,16 +15,16 @@ const insertIntoUsersTable = async (queryParams) => {
 };
 
 const getUserByEmail = async (email) => {
-  const { cmd, args } = getUser(email);
-  return mysql.pool.query(cmd, args);
+  const { selectUserByEmailCmd, selectUserByEmailArgs } = getUser(email);
+  return mysql.pool.query(selectUserByEmailCmd, selectUserByEmailArgs);
 };
 
 const updatePassword = async (queryParams) => {
   const {
-    cmd,
-    args,
+    updatePasswordCmd,
+    updatePasswordArgs,
   } = updateUser.getQueryParamsForPassword(queryParams);
-  mysql.pool.query(cmd, args);
+  mysql.pool.query(updatePasswordCmd, updatePasswordArgs);
 };
 
 module.exports = {

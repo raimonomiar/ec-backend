@@ -1,20 +1,15 @@
-const _ = require('lodash');
 const { users } = require('../schema');
 
-const queryTemplate = `
+const updatePassword = `
   UPDATE ${users.table}
-  SET ${users.cols.passwordHash.colName} = '<%= hashPassword %>'
-  WHERE BIN_TO_UUID(${users.cols.userId.colName}) = '<%= userId %>'`;
-
-const queryParamsGenerator = _.template(queryTemplate);
+  SET ${users.cols.passwordHash.colName} = ?
+  WHERE BIN_TO_UUID(${users.cols.userId.colName}) = ?`;
 
 const getQueryParamsForPassword = ({ userId, hashPassword }) => {
-  const queryArgs = {};
-  const templateParams = { userId, hashPassword };
-  const cmd = queryParamsGenerator(templateParams);
+  const queryArgs = [hashPassword, userId];
   return {
-    cmd,
-    args: queryArgs,
+    updatePasswordCmd: updatePassword,
+    updatePasswordArgs: queryArgs,
   };
 };
 module.exports = {

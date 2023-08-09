@@ -1,23 +1,19 @@
-const _ = require('lodash');
 const { users } = require('../schema');
 
-const queryTemplate = `
+const selectUserByEmail = `
   SELECT 
     BIN_TO_UUID(${users.cols.userId.colName}) as ${users.cols.userId.name},
     ${users.cols.firstName.colName} as ${users.cols.firstName.name},
     ${users.cols.lastName.colName} as ${users.cols.lastName.name},
     ${users.cols.passwordHash.colName} as ${users.cols.passwordHash.name}
-  FROM ${users.table} WHERE ${users.cols.email.colName} = '<%= email %>'`;
-
-const queryParamsGenerator = _.template(queryTemplate);
+  FROM ${users.table} WHERE ${users.cols.email.colName} = ?`;
 
 const getQueryParams = (email) => {
-  const queryArgs = {};
-  const templatePArams = { email };
-  const cmd = queryParamsGenerator(templatePArams);
+  const queryArgs = [email];
+
   return {
-    cmd,
-    args: queryArgs,
+    selectUserByEmailCmd: selectUserByEmail,
+    selectUserByEmailArgs: queryArgs,
   };
 };
 
