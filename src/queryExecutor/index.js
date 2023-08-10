@@ -6,12 +6,12 @@ const {
   updateUser,
 } = queries;
 
-const insertIntoUsersTable = async (queryParams) => {
+const insertIntoUsersTable = (queryParams) => {
   const {
     insertIntoUsersCmd,
     insertIntoUsersArgs,
   } = addUser.getQueryParamsForUsers(queryParams);
-  mysql.pool.query(insertIntoUsersCmd, insertIntoUsersArgs);
+  return mysql.pool.query(insertIntoUsersCmd, insertIntoUsersArgs);
 };
 
 const getUserByEmail = async (email) => {

@@ -1,5 +1,10 @@
 const HttpStatusCode = require('http-status-codes');
 const { userService } = require('../../services');
+const {
+  putUser: {
+    schemaUpdatePassword,
+  },
+} = require('../../lib/route-validators');
 
 const updatePassword = async (req, res, next) => {
   try {
@@ -17,6 +22,7 @@ module.exports = [
     route: '/:userId/password',
     method: 'put',
     middlewares: [
+      schemaUpdatePassword,
       updatePassword,
     ],
   },

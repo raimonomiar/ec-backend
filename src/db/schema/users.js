@@ -17,10 +17,4 @@ module.exports = {
     updatedAt: { name: 'updatedAt', colName: 'updated_at' },
     updatedBy: { name: 'udpatedBy', colName: 'updated_by' },
   },
-  constraints: {
-    isAdmin: [
-      1,
-      0,
-    ],
-  },
 };

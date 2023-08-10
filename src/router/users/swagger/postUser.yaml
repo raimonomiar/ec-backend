@@ -11,6 +11,18 @@ components:
           type: string
         lastName:
           type: string 
+        street:
+          type: string
+        city:
+          type: string
+        zip:
+          type: string
+        phone:
+          type: string
+        isAdmin:
+          type: boolean
+        appartment:
+          type: string
       required:
         - firstName
         - password

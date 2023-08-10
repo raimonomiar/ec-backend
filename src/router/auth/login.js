@@ -10,6 +10,11 @@ const {
     UNAUTHORIZED,
   },
 } = require('../../../constants/errorMaps');
+const {
+  auth: {
+    schemaLogin,
+  },
+} = require('../../lib/route-validators');
 
 const responseGenerator = async (req, res, next) => {
   try {
@@ -39,6 +44,7 @@ module.exports = [
     route: '/login',
     method: 'post',
     middlewares: [
+      schemaLogin,
       responseGenerator,
     ],
   },
