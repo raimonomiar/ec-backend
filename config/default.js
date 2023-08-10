@@ -38,6 +38,9 @@ module.exports = {
   constants: {
     enableSwagger: true,
     saltRound: 10,
+    minPasswordLength: 8,
+    passwordRegex: '^(?=.*[A-Z])(?=.*\\d).+$',
+    ER_DUP_ENTRY: 'ER_DUP_ENTRY',
   },
   logger: {
     APP_LOG_PATH: process.env.APP_LOG_PATH || 'default.log',

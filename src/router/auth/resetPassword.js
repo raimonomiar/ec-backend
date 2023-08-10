@@ -25,6 +25,11 @@ const {
     },
   },
 } = require('../../../constants/emailTemplates');
+const {
+  auth: {
+    schemaCheckEmail,
+  },
+} = require('../../lib/route-validators');
 
 const responseGenerator = async (req, res, next) => {
   try {
@@ -55,6 +60,7 @@ module.exports = [
     route: '/resetpassword',
     method: 'post',
     middlewares: [
+      schemaCheckEmail,
       responseGenerator,
     ],
   },
