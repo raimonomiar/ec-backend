@@ -9,8 +9,16 @@ const {
       user: smtpUser,
     },
   },
+  constants: {
+    TOKEN_TYPE: {
+      RESET,
+    },
+  },
 } = require('config');
-const { userService } = require('../../services');
+const {
+  userService,
+  tokenService,
+} = require('../../services');
 const mailer = require('../../lib/mailer');
 const {
   userErrors: {
@@ -40,7 +48,11 @@ const responseGenerator = async (req, res, next) => {
         error: NOT_FOUND,
       });
     }
-    const resetPasswordLink = `${uri}/resetpassword/${user.userId}`;
+    const token = await tokenService.getResetPasswordToken({
+      userId: user.userId,
+      tokenType: RESET,
+    });
+    const resetPasswordLink = `${uri}/resetpassword/${user.userId}?token=${token}`;
     const generateEmailBody = _.template(text);
     const templateParams = { resetPasswordLink };
     await mailer({

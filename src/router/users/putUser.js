@@ -3,6 +3,7 @@ const { userService } = require('../../services');
 const {
   putUser: {
     schemaUpdatePassword,
+    validateResetToken,
   },
 } = require('../../lib/route-validators');
 
@@ -23,6 +24,7 @@ module.exports = [
     method: 'put',
     middlewares: [
       schemaUpdatePassword,
+      validateResetToken,
       updatePassword,
     ],
   },

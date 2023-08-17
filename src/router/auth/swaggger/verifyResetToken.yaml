@@ -1,0 +1,42 @@
+components:
+  schemas:
+    verifyToken:
+      type: object
+      properties:
+        token:
+          type: string
+      required:
+        - token
+paths:
+  /verifyresettoken:
+    post:
+      tag:
+       - verifyresettoken
+      summary: Verify Reset Token
+      description: Verify Reset Token of user to reset password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/verifyToken'
+      responses:
+        '200':
+          description: Request processed successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/verifyToken'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+      

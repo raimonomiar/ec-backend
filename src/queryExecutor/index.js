@@ -4,6 +4,8 @@ const {
   addUser,
   getUser,
   updateUser,
+  addToken,
+  getToken,
 } = queries;
 
 const insertIntoUsersTable = (queryParams) => {
@@ -27,8 +29,26 @@ const updatePassword = async (queryParams) => {
   mysql.pool.query(updatePasswordCmd, updatePasswordArgs);
 };
 
+const insertIntoTokensTable = (queryParams) => {
+  const {
+    insertIntoTokensCmd,
+    insertIntoTokensArgs,
+  } = addToken.getQueryParamsForTokens(queryParams);
+  return mysql.pool.query(insertIntoTokensCmd, insertIntoTokensArgs);
+};
+
+const getResetPasswordToken = async (queryParams) => {
+  const {
+    selectTokenCmd,
+    selectTokenArgs,
+  } = getToken(queryParams);
+  return mysql.pool.query(selectTokenCmd, selectTokenArgs);
+};
+
 module.exports = {
   insertIntoUsersTable,
   getUserByEmail,
   updatePassword,
+  insertIntoTokensTable,
+  getResetPasswordToken,
 };

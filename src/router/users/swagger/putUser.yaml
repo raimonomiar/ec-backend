@@ -24,6 +24,12 @@ paths:
       summary: Update Password
       description: Update Password to the system
       parameters:
+        - name: token
+          in: header
+          description: token key
+          required: true
+          schema:
+            type: string
         - name: userId
           in: path
           description: User Id

@@ -40,7 +40,13 @@ module.exports = {
     saltRound: 10,
     minPasswordLength: 8,
     passwordRegex: '^(?=.*[A-Z])(?=.*\\d).+$',
+    tokenLength: 32,
+    tokenExpirationTime: 86400,
     ER_DUP_ENTRY: 'ER_DUP_ENTRY',
+    TOKEN_TYPE: {
+      AUTH: 'auth',
+      RESET: 'reset',
+    },
   },
   logger: {
     APP_LOG_PATH: process.env.APP_LOG_PATH || 'default.log',

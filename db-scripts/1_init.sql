@@ -22,3 +22,10 @@ CREATE TABLE IF NOT EXISTS users (
     updated_by BINARY(16)
 );
 
+CREATE TABLE IF NOT EXISTS tokens (
+  token varchar(100) PRIMARY KEY,
+  user_id BINARY(16),
+  token_type VARCHAR(50) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
+);

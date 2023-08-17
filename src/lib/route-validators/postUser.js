@@ -2,7 +2,6 @@ const joi = require('joi');
 const validate = require('express-validation');
 const {
   minPasswordLength,
-  passwordRegex,
 } = require('config').get('constants');
 
 const schema = {
@@ -12,7 +11,6 @@ const schema = {
     lastName: joi.string().required().max(50),
     password: joi.string()
       .min(minPasswordLength)
-      .regex(new RegExp(passwordRegex))
       .required(),
     street: joi.string().max(100),
     zip: joi.string().max(20),
