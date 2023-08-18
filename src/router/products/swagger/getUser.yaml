@@ -1,0 +1,68 @@
+components:
+  schemas:
+    getUserResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              price:
+                type: number
+              frontImage:
+                type: string
+              backImage:
+                type: string
+paths:
+  /products:
+    get:
+      tags:
+        - products
+      summary: Get all products
+      description: Returns all products with total count
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: product name used for filtering
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Number of items per page
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Current page
+        - in: query
+          name: sortBy
+          schema:
+            type: string
+          description: Sort by field
+        - in: query
+          name: sortOrder
+          schema:
+            type: string
+          description: Sort order (asc, desc)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUserResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'

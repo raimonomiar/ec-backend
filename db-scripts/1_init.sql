@@ -30,6 +30,32 @@ CREATE TABLE IF NOT EXISTS tokens (
   FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
+CREATE TABLE IF NOT EXISTS products (
+    product_id BINARY(16) DEFAULT (UUID_TO_BIN(UUID())) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    category_id BINARY(16),
+    front_image VARCHAR(255) NOT NULL,
+    back_image VARCHAR(255) NOT NULL,
+    created_by BINARY(16),
+    updated_by BINARY(16),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES category(category_id)
+);
+
+CREATE TABLE IF NOT EXISTS inventories (
+    inventory_id BINARY(16) DEFAULT (UUID_TO_BIN(UUID())) PRIMARY KEY,
+    product_id BINARY(16) NOT NULL,
+    quantity INT NOT NULL,
+    size VARCHAR(10) NOT NULL,
+    color VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
 CREATE TABLE IF NOT EXISTS categories (
   category_id BINARY(16) DEFAULT (UUID_TO_BIN(UUID())) PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
