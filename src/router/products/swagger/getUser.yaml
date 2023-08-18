@@ -1,6 +1,6 @@
 components:
   schemas:
-    getUserResponse:
+    getProductsResponse:
       type: object
       properties:
         total:
@@ -20,6 +20,34 @@ components:
                 type: string
               backImage:
                 type: string
+    getProductWithInventoriesResponse:
+      type: object
+      properties:
+        productId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        frontImage:
+          type: string
+        backImage:
+          type: string
+        inventories:
+          type: array
+          items:
+            type: object
+            properties:
+              inventoryId:
+                type: integer
+              size:
+                type: string
+              color:
+                type: string
+              quantity:
+                type: integer
 paths:
   /products:
     get:
@@ -60,6 +88,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/getUserResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+  /products/{productId}:
+    get:
+      tags:
+        - products
+      summary: Get product with inventories
+      description: Returns product with inventories
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: string
+          description: product id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getProductWithInventoriesResponse'
         '500':
           description: Internal Server Error
           content:
