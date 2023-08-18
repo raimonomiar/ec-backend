@@ -5,6 +5,7 @@ const addToken = require('./addToken');
 const getToken = require('./getToken');
 const addProduct = require('./addProduct');
 const getProduct = require('./getProduct');
+const addCategory = require('./addToCategory');
 
 module.exports = {
   addUser,
@@ -14,4 +15,5 @@ module.exports = {
   getToken,
   addProduct,
   getProduct,
+  addCategory,
 };

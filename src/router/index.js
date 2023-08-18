@@ -5,5 +5,7 @@ router.use('/health', require('./health'));
 router.use('/users', require('./users'));
 router.use('/', require('./auth'));
 router.use('/products', require('./products'));
+router.use('/category', require('./category'));
+
 
 module.exports = router;
