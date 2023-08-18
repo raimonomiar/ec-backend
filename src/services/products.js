@@ -33,7 +33,7 @@ async function getProducts(queryParams = {}) {
     offset,
   } = queryParams;
   const rows = await queryExecutor.getProducts({
-    name, sortBy, sortOrder, limit: parseInt(limit, 10), offset: parseInt(offset, 10),
+    name, sortBy, sortOrder, limit, offset,
   });
   const products = productHelper.filterAndMapProducts(rows, ['total']);
   return products;

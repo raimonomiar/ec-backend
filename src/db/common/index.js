@@ -9,12 +9,9 @@ const constructInFilterClause = ({ columnName, tableAlias, filter }) => (filter 
 
 const constructIsEqualFilterClause = ({ columnName, tableAlias }) => ` AND ${tableAlias}.${columnName} = ? `;
 
-const constructLikeFilterClause = ({ columnName, tableAlias }) => ` AND ${tableAlias}.${columnName} LIKE %?% `;
-
 module.exports = {
   constructOrderByClause,
   constructLimitClause,
   constructInFilterClause,
   constructIsEqualFilterClause,
-  constructLikeFilterClause,
 };

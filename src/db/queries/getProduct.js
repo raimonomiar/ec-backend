@@ -4,7 +4,9 @@ const {
   constructLimitClause,
 } = require('../common');
 
-const selectProductsWIthPagination = `
+const whereClause = (name) => (name ? `WHERE ${products.cols.name.colName} LIKE ?` : '');
+
+const selectProductsWIthPagination = (name) => `
   SELECT
     count(${products.cols.productId.colName}) as total,
     BIN_TO_UUID(${products.cols.productId.colName}) as ${products.cols.productId.name},
@@ -14,15 +16,21 @@ const selectProductsWIthPagination = `
     ${products.cols.frontImage.colName} as ${products.cols.frontImage.name},
     ${products.cols.backImage.colName} as ${products.cols.backImage.name}
   FROM ${products.table}
+  ${whereClause(name)}
   GROUP BY ${products.cols.productId.colName}
   `;
 
 const getQueryParamsForProducts = ({
   name, sortBy, sortOrder, limit, offset,
 }) => {
-  const queryArgs = [limit, offset];
+  const queryArgs = [];
+  if (name) {
+    queryArgs.push(`%${name}%`);
+  }
+  queryArgs.push(limit, (offset - 1) * limit);
+
   return {
-    selectProductsWIthPaginationCmd: selectProductsWIthPagination
+    selectProductsWIthPaginationCmd: selectProductsWIthPagination(name)
       + constructOrderByClause(sortBy, sortOrder)
       + constructLimitClause,
     selectProductsWIthPaginationArgs: queryArgs,

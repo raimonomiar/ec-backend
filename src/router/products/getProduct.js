@@ -1,5 +1,10 @@
 const HttpStatusCode = require('http-status-codes');
 const { productService } = require('../../services');
+const {
+  getProduct: {
+    schemaGetProducts,
+  },
+} = require('../../lib/route-validators');
 
 const getProducts = async (req, res, next) => {
   try {
@@ -20,6 +25,7 @@ module.exports = [
     route: '/',
     method: 'get',
     middlewares: [
+      schemaGetProducts,
       getProducts,
     ],
   },
