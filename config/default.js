@@ -47,6 +47,10 @@ module.exports = {
       AUTH: 'auth',
       RESET: 'reset',
     },
+    SORT_ASC: 'ASC',
+    SORT_DESC: 'DESC',
+    DEFAULT_LIMIT: 10,
+    DEFAULT_OFFSET: 0,
   },
   logger: {
     APP_LOG_PATH: process.env.APP_LOG_PATH || 'default.log',

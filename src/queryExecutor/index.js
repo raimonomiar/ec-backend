@@ -9,17 +9,23 @@ const {
   addCategory,
   updateCategory,
   deleteCategory,
+  addProduct,
+  getProduct,
 } = queries;
 
-const insertIntoUsersTable = (queryParams) => {
-  const { insertIntoUsersCmd, insertIntoUsersArgs } = addUser.getQueryParamsForUsers(queryParams);
+const insertIntoUsersTable = async (queryParams) => {
+  const {
+    insertIntoUsersCmd,
+    insertIntoUsersArgs,
+  } = addUser.getQueryParamsForUsers(queryParams);
   return mysql.pool.query(insertIntoUsersCmd, insertIntoUsersArgs);
 };
 
-// for category
 const insertIntoCategoryTable = async (queryParams) => {
-  // eslint-disable-next-line max-len
-  const { insertIntoCategoryCmd, insertIntoCategoryArgs } = addCategory.getQueryParamsForCategory(queryParams);
+  const {
+    insertIntoCategoryCmd,
+    insertIntoCategoryArgs,
+  } = addCategory.getQueryParamsForCategory(queryParams);
   await mysql.pool.query(insertIntoCategoryCmd, insertIntoCategoryArgs);
 };
 
@@ -40,14 +46,17 @@ const getUserByEmail = async (email) => {
 };
 
 const updatePassword = async (queryParams) => {
-  // eslint-disable-next-line max-len
-  const { updatePasswordCmd, updatePasswordArgs } = updateUser.getQueryParamsForPassword(queryParams);
+  const {
+    updatePasswordCmd,
+    updatePasswordArgs,
+  } = updateUser.getQueryParamsForPassword(queryParams);
   mysql.pool.query(updatePasswordCmd, updatePasswordArgs);
 };
 
 const insertIntoTokensTable = (queryParams) => {
-  // eslint-disable-next-line max-len
-  const { insertIntoTokensCmd, insertIntoTokensArgs } = addToken.getQueryParamsForTokens(queryParams);
+  const {
+    insertIntoTokensCmd, insertIntoTokensArgs,
+  } = addToken.getQueryParamsForTokens(queryParams);
   return mysql.pool.query(insertIntoTokensCmd, insertIntoTokensArgs);
 };
 
@@ -56,13 +65,40 @@ const getResetPasswordToken = async (queryParams) => {
   return mysql.pool.query(selectTokenCmd, selectTokenArgs);
 };
 
+const insertIntoProductsTable = async (queryParams) => {
+  const {
+    insertIntoProductsCmd,
+    insertIntoProductsArgs,
+  } = addProduct.getQueryParamsForProducts(queryParams);
+  return mysql.pool.query(insertIntoProductsCmd, insertIntoProductsArgs);
+};
+
+const getProducts = async (queryParams) => {
+  const {
+    selectProductsWIthPaginationCmd,
+    selectProductsWIthPaginationArgs,
+  } = getProduct.getQueryParamsForProducts(queryParams);
+  return mysql.pool.query(selectProductsWIthPaginationCmd, selectProductsWIthPaginationArgs);
+};
+
+const getProductWithInventory = async (queryParams) => {
+  const {
+    selectProductWithInventoryCmd,
+    selectProductWithInventoryArgs,
+  } = getProduct.getQueryParamsForProductWithInventory(queryParams);
+  return mysql.pool.query(selectProductWithInventoryCmd, selectProductWithInventoryArgs);
+};
+
 module.exports = {
   insertIntoUsersTable,
   getUserByEmail,
   updatePassword,
   insertIntoTokensTable,
   getResetPasswordToken,
+  insertIntoProductsTable,
+  getProducts,
   insertIntoCategoryTable,
   updateCategoryInTable,
   deleteCategoryFromTable,
+  getProductWithInventory,
 };
