@@ -6,9 +6,11 @@ const {
   updateUser,
   addToken,
   getToken,
+  addProduct,
+  getProduct,
 } = queries;
 
-const insertIntoUsersTable = (queryParams) => {
+const insertIntoUsersTable = async (queryParams) => {
   const {
     insertIntoUsersCmd,
     insertIntoUsersArgs,
@@ -45,10 +47,28 @@ const getResetPasswordToken = async (queryParams) => {
   return mysql.pool.query(selectTokenCmd, selectTokenArgs);
 };
 
+const insertIntoProductsTable = async (queryParams) => {
+  const {
+    insertIntoProductsCmd,
+    insertIntoProductsArgs,
+  } = addProduct.getQueryParamsForProducts(queryParams);
+  return mysql.pool.query(insertIntoProductsCmd, insertIntoProductsArgs);
+};
+
+const getProducts = async (queryParams) => {
+  const {
+    selectProductsWIthPaginationCmd,
+    selectProductsWIthPaginationArgs,
+  } = getProduct.getQueryParamsForProducts(queryParams);
+  return mysql.pool.query(selectProductsWIthPaginationCmd, selectProductsWIthPaginationArgs);
+};
+
 module.exports = {
   insertIntoUsersTable,
   getUserByEmail,
   updatePassword,
   insertIntoTokensTable,
   getResetPasswordToken,
+  insertIntoProductsTable,
+  getProducts,
 };
