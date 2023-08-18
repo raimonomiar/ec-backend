@@ -9,10 +9,11 @@ const insertIntoUsersTable = (queryParams) => {
   return mysql.pool.query(insertIntoUsersCmd, insertIntoUsersArgs);
 };
 
-// for category
 const insertIntoCategoryTable = async (queryParams) => {
-  // eslint-disable-next-line max-len
-  const { insertIntoCategoryCmd, insertIntoCategoryArgs } = addCategory.getQueryParamsForCategory(queryParams);
+  const {
+    insertIntoCategoryCmd,
+    insertIntoCategoryArgs,
+  } = addCategory.getQueryParamsForCategory(queryParams);
   await mysql.pool.query(insertIntoCategoryCmd, insertIntoCategoryArgs);
 };
 
@@ -22,14 +23,17 @@ const getUserByEmail = async (email) => {
 };
 
 const updatePassword = async (queryParams) => {
-  // eslint-disable-next-line max-len
-  const { updatePasswordCmd, updatePasswordArgs } = updateUser.getQueryParamsForPassword(queryParams);
+  const {
+    updatePasswordCmd,
+    updatePasswordArgs,
+  } = updateUser.getQueryParamsForPassword(queryParams);
   mysql.pool.query(updatePasswordCmd, updatePasswordArgs);
 };
 
 const insertIntoTokensTable = (queryParams) => {
-  // eslint-disable-next-line max-len
-  const { insertIntoTokensCmd, insertIntoTokensArgs } = addToken.getQueryParamsForTokens(queryParams);
+  const {
+    insertIntoTokensCmd, insertIntoTokensArgs,
+  } = addToken.getQueryParamsForTokens(queryParams);
   return mysql.pool.query(insertIntoTokensCmd, insertIntoTokensArgs);
 };
 
