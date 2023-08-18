@@ -3,9 +3,11 @@ const getUser = require('./getUser');
 const updateUser = require('./updateUser');
 const addToken = require('./addToken');
 const getToken = require('./getToken');
+const addCategory = require('./addCategory');
+const updateCategory = require('./updateCategory');
+const deleteCategory = require('./deleteCategory');
 const addProduct = require('./addProduct');
 const getProduct = require('./getProduct');
-const addCategory = require('./addToCategory');
 
 module.exports = {
   addUser,
@@ -16,4 +18,6 @@ module.exports = {
   addProduct,
   getProduct,
   addCategory,
+  updateCategory,
+  deleteCategory,
 };

@@ -34,9 +34,6 @@ module.exports = [
   {
     route: '/',
     method: 'post',
-    middlewares: [
-      schema,
-      resposneEntity,
-    ],
+    middlewares: [schema, resposneEntity],
   },
 ];

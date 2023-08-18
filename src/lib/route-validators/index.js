@@ -3,6 +3,7 @@ const putUser = require('./putUser');
 const auth = require('./auth');
 const getProduct = require('./getProduct');
 const postCategory = require('./postCategory');
+const updateCategory = require('./putCategory');
 
 module.exports = {
   postUser,
@@ -10,4 +11,5 @@ module.exports = {
   auth,
   getProduct,
   postCategory,
+  updateCategory,
 };
