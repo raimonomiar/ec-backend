@@ -39,7 +39,15 @@ async function getProducts(queryParams = {}) {
   return products;
 }
 
+async function getProductWithInventories(queryParams) {
+  const { productId } = queryParams;
+  const rows = await queryExecutor.getProductWithInventory(productId);
+  const products = productHelper.filterAndMapProductsAndInventory(rows);
+  return products;
+}
+
 module.exports = {
   addProduct,
   getProducts,
+  getProductWithInventories,
 };

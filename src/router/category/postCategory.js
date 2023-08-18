@@ -7,7 +7,8 @@ const { postCategory: { schema } } = require('../../lib/route-validators');
 const {
   categoryErrors: {
     CONFLICT: {
-      code, message,
+      message,
+      code,
     },
   },
 } = require('../../../constants/errorMaps');

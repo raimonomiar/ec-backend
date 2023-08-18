@@ -3,6 +3,7 @@ const { productService } = require('../../services');
 const {
   getProduct: {
     schemaGetProducts,
+    schemaGetProduct,
   },
 } = require('../../lib/route-validators');
 
@@ -20,6 +21,16 @@ const getProducts = async (req, res, next) => {
   }
 };
 
+const getProduct = async (req, res, next) => {
+  try {
+    const { productId } = req.params;
+    const product = await productService.getProductWithInventories({ productId });
+    res.status(HttpStatusCode.OK).send(product);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = [
   {
     route: '/',
@@ -27,6 +38,14 @@ module.exports = [
     middlewares: [
       schemaGetProducts,
       getProducts,
+    ],
+  },
+  {
+    route: '/:productId',
+    method: 'get',
+    middlewares: [
+      schemaGetProduct,
+      getProduct,
     ],
   },
 ];

@@ -27,6 +27,13 @@ const schemaGetProducts = {
   }),
 };
 
+const schemaGetProduct = {
+  params: joi.object({
+    productId: joi.string().guid().required(),
+  }).required(),
+};
+
 module.exports = {
   schemaGetProducts: validate(schemaGetProducts),
+  schemaGetProduct: validate(schemaGetProduct),
 };
