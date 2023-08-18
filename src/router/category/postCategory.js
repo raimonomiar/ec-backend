@@ -3,7 +3,9 @@ const HttpError = require('standard-http-error');
 const { pathEq } = require('ramda');
 const { ER_DUP_ENTRY } = require('config').get('constants');
 const { categoryService } = require('../../services');
-const { postCategory: { schema } } = require('../../lib/route-validators');
+const {
+  postCategory: { schema },
+} = require('../../lib/route-validators');
 // const {userErrors: {CONFLICT: {code, message,},},} = require('../../../constants/errorMaps');
 
 const resposneEntity = async (req, res, next) => {
@@ -27,11 +29,8 @@ const resposneEntity = async (req, res, next) => {
 
 module.exports = [
   {
-    route: '/addToCategory',
+    route: '/',
     method: 'post',
-    middlewares: [
-      schema,
-      resposneEntity,
-    ],
+    middlewares: [schema, resposneEntity],
   },
 ];

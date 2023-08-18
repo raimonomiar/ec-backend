@@ -8,15 +8,20 @@ async function addToCategory(input) {
   });
   return result;
 }
-// async function addToCategory(categoryData) {
-//   try {
-//     await queryExecutor.insertIntoCategoryTable(categoryData);
-//   } catch (error) {
-//     logger.error(`Error adding to category: ${error}`);
-//     throw new AppError("Error adding to category", 500);
-//   }
-// }
+
+async function updateCategory(input) {
+  const { categoryId, name } = input;
+  await queryExecutor.updateCategoryInTable({
+    categoryId, name,
+  });
+}
+
+async function deleteCategoryById(categoryId) {
+  await queryExecutor.deleteCategoryFromTable(categoryId);
+}
 
 module.exports = {
   addToCategory,
+  updateCategory,
+  deleteCategoryById,
 };
