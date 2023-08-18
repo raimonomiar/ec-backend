@@ -7,5 +7,4 @@ router.use('/', require('./auth'));
 router.use('/products', require('./products'));
 router.use('/category', require('./category'));
 
-
 module.exports = router;
