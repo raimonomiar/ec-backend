@@ -45,7 +45,7 @@ const getQueryParamsForProducts = ({
   if (name) {
     queryArgs.push(`%${name}%`);
   }
-  queryArgs.push(limit, (offset - 1) * limit);
+  queryArgs.push(limit, offset !== 0 ? (offset - 1) * limit : 0);
 
   return {
     selectProductsWIthPaginationCmd: selectProductsWIthPagination(name)

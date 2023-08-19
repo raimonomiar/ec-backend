@@ -17,7 +17,8 @@ const schemaGetProducts = {
     name: joi.string().max(255),
     sortBy: joi.string()
       .valid(sortByFields)
-      .insensitive(),
+      .insensitive()
+      .default(sortByFields[0]),
     sortOrder: joi.string()
       .valid([SORT_ASC, SORT_DESC])
       .insensitive()
