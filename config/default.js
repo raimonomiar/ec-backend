@@ -51,6 +51,7 @@ module.exports = {
     SORT_DESC: 'DESC',
     DEFAULT_LIMIT: 10,
     DEFAULT_OFFSET: 0,
+    CLS_KEY_USER: 'user',
   },
   logger: {
     APP_LOG_PATH: process.env.APP_LOG_PATH || 'default.log',
