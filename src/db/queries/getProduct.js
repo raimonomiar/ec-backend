@@ -8,7 +8,7 @@ const whereClause = (name) => (name ? `WHERE ${products.cols.name.colName} LIKE 
 
 const selectProductsWIthPagination = (name) => `
   SELECT
-    count(${products.cols.productId.colName}) as total,
+    P.total,
     BIN_TO_UUID(${products.cols.productId.colName}) as ${products.cols.productId.name},
     ${products.cols.name.colName} as ${products.cols.name.name},
     ${products.cols.description.colName} as ${products.cols.description.name},
@@ -16,9 +16,9 @@ const selectProductsWIthPagination = (name) => `
     ${products.cols.frontImage.colName} as ${products.cols.frontImage.name},
     ${products.cols.backImage.colName} as ${products.cols.backImage.name},
     ${products.cols.color.colName} as ${products.cols.color.name}
-  FROM ${products.table}
+  FROM ${products.table},
+  (SELECT COUNT(${products.cols.productId.colName}) as total FROM ${products.table}) as P
   ${whereClause(name)}
-  GROUP BY ${products.cols.productId.colName}
   `;
 
 const selectProductWithInventory = `

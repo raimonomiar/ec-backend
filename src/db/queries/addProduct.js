@@ -7,7 +7,7 @@ const insertIntoProducts = `INSERT INTO ${products.table}(
   ${products.cols.categoryId.colName},
   ${products.cols.frontImage.colName},
   ${products.cols.backImage.colName},
-  ${products.cols.color.colName}
+  ${products.cols.color.colName},
   ${products.cols.createdBy.colName}
   ) VALUES (?, ?, ?, UUID_TO_BIN(?), ?, ?, ?, UUID_TO_BIN(?))`;
 

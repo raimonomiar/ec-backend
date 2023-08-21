@@ -21,7 +21,8 @@ const {
 
 const checkAuthToken = async (req, res, next) => {
   try {
-    const { authorization } = req.headers;
+    let { authorization } = req.headers;
+    authorization = authorization.replace('Bearer ', '');
     const decoded = jwt.verify(authorization, secretKey);
     clsSession.set(CLS_KEY_USER, decoded);
     next();
