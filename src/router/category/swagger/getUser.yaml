@@ -1,0 +1,245 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Category API
+paths:
+  /category:
+    get:
+      tags:
+        - categories
+      summary: Get all categories
+      description: Returns all categories with total count
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: category name used for filtering
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Number of items per page
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Current page
+        - in: query
+          name: sortBy
+          schema:
+            type: string
+          description: Sort by field
+        - in: query
+          name: sortOrder
+          schema:
+            type: string
+          description: Sort order (asc, desc)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCategoriesResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+
+    post:
+      tags:
+        - categories
+      summary: Create a new category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createCategoryRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createCategoryResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+
+  /category/{categoryId}:
+    get:
+      tags:
+        - categories
+      summary: Get a category by ID
+      description: Returns a single category
+      parameters:
+        - in: path
+          name: categoryId
+          schema:
+            type: string
+          description: category id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCategoryResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+
+    put:
+      tags:
+        - categories
+      summary: Update an existing category
+      parameters:
+        - in: path
+          name: categoryId
+          schema:
+            type: string
+          description: category id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateCategoryRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateCategoryResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+
+    delete:
+      tags:
+        - categories
+      summary: Delete a category
+      parameters:
+        - in: path
+          name: categoryId
+          schema:
+            type: string
+          description: category id
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+
+components:
+  schemas:
+    getCategoriesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/categoryData'
+    categoryData:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        frontImage:
+          type: string
+        backImage:
+          type: string
+    createCategoryRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        frontImage:
+          type: string
+        backImage:
+          type: string
+    createCategoryResponse:
+      type: object
+      properties:
+        categoryId:
+          type: string
+    getCategoryResponse:
+      $ref: '#/components/schemas/categoryData'
+    updateCategoryRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        frontImage:
+          type: string
+        backImage:
+          type: string
+    updateCategoryResponse:
+      $ref: '#/components/schemas/categoryData'
+    errorResponse:
+      type: object
+      properties:
+        error:
+          type: string

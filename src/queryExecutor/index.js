@@ -11,6 +11,7 @@ const {
   deleteCategory,
   addProduct,
   getProduct,
+  getCategory,
 } = queries;
 
 const insertIntoUsersTable = async (queryParams) => {
@@ -38,6 +39,22 @@ const deleteCategoryFromTable = async (queryParams) => {
   // eslint-disable-next-line max-len
   const { deleteCategoryNameCmd, deleteCategoryNameArgs } = deleteCategory.getQueryParamsForDeleteCategory(queryParams);
   await mysql.pool.query(deleteCategoryNameCmd, deleteCategoryNameArgs);
+};
+
+const getCategories = async (queryParams) => {
+  const {
+    selectCategoriesWIthPaginationCmd,
+    selectCategoriesWIthPaginationArgs,
+  } = getCategory.getQueryParamsForCategories(queryParams);
+  return mysql.pool.query(selectCategoriesWIthPaginationCmd, selectCategoriesWIthPaginationArgs);
+};
+
+const getCategoryWithProduct = async (queryParams) => {
+  const {
+    selectCategoryWithInventoryCmd,
+    selectCategoryWithInventoryArgs,
+  } = getCategory.getQueryParamsForCategoryWithProduct(queryParams);
+  return mysql.pool.query(selectCategoryWithInventoryCmd, selectCategoryWithInventoryArgs);
 };
 
 const getUserByEmail = async (email) => {
@@ -100,5 +117,7 @@ module.exports = {
   insertIntoCategoryTable,
   updateCategoryInTable,
   deleteCategoryFromTable,
+  getCategories,
+  getCategoryWithProduct,
   getProductWithInventory,
 };
