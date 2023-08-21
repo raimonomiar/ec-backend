@@ -10,10 +10,10 @@ const {
 const getProducts = async (req, res, next) => {
   try {
     const {
-      name, sortBy, sortOrder, limit, offset,
+      name, categoryId, sortBy, sortOrder, limit, offset,
     } = req.query;
     const products = await productService.getProducts({
-      name, sortBy, sortOrder, limit, offset,
+      name, categoryId, sortBy, sortOrder, limit, offset,
     });
     res.status(HttpStatusCode.OK).send(products);
   } catch (error) {

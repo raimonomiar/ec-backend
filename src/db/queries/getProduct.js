@@ -4,9 +4,10 @@ const {
   constructLimitClause,
 } = require('../common');
 
-const whereClause = (name) => (name ? `WHERE ${products.cols.name.colName} LIKE ?` : '');
+const nameClause = (name) => (name ? `AND ${products.cols.name.colName} LIKE ?` : '');
+const categoryIdClause = (categoryId) => (categoryId ? `AND ${products.cols.categoryId.colName} = UUID_TO_BIN(?)` : '');
 
-const selectProductsWIthPagination = (name) => `
+const selectProductsWIthPagination = (name, categoryId) => `
   SELECT
     P.total,
     BIN_TO_UUID(${products.cols.productId.colName}) as ${products.cols.productId.name},
@@ -17,9 +18,11 @@ const selectProductsWIthPagination = (name) => `
     ${products.cols.backImage.colName} as ${products.cols.backImage.name},
     ${products.cols.color.colName} as ${products.cols.color.name}
   FROM ${products.table},
-  (SELECT COUNT(${products.cols.productId.colName}) as total FROM ${products.table}) as P
-  ${whereClause(name)}
-  `;
+    (SELECT COUNT(${products.cols.productId.colName}) as total 
+    FROM ${products.table} WHERE ${products.cols.createdBy.colName} IS NOT NULL) as P
+  WHERE ${products.table}.${products.cols.createdBy.colName} IS NOT NULL
+  ${nameClause(name)}
+  ${categoryIdClause(categoryId)}`;
 
 const selectProductWithInventory = `
   SELECT
@@ -40,16 +43,16 @@ const selectProductWithInventory = `
 `;
 
 const getQueryParamsForProducts = ({
-  name, sortBy, sortOrder, limit, offset,
+  name, categoryId, sortBy, sortOrder, limit, offset,
 }) => {
   const queryArgs = [];
-  if (name) {
-    queryArgs.push(`%${name}%`);
-  }
+  if (name) queryArgs.push(`%${name}%`);
+  if (categoryId) queryArgs.push(categoryId);
+
   queryArgs.push(limit, offset !== 0 ? (offset - 1) * limit : 0);
 
   return {
-    selectProductsWIthPaginationCmd: selectProductsWIthPagination(name)
+    selectProductsWIthPaginationCmd: selectProductsWIthPagination(name, categoryId)
       + constructOrderByClause(sortBy, sortOrder)
       + constructLimitClause,
     selectProductsWIthPaginationArgs: queryArgs,

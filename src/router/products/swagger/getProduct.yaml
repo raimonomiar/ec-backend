@@ -62,6 +62,11 @@ paths:
             type: string
           description: product name used for filtering
         - in: query
+          name: categoryId
+          schema:
+            type: string
+          description: category id used for filtering
+        - in: query
           name: limit
           schema:
             type: integer

@@ -15,6 +15,7 @@ const sortByFields = [
 const schemaGetProducts = {
   query: joi.object({
     name: joi.string().max(255),
+    categoryId: joi.string().guid(),
     sortBy: joi.string()
       .valid(sortByFields)
       .insensitive()
