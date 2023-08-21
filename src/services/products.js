@@ -29,13 +29,14 @@ async function addProduct(input) {
 async function getProducts(queryParams = {}) {
   const {
     name,
+    categoryId,
     sortBy,
     sortOrder,
     limit,
     offset,
   } = queryParams;
   const rows = await queryExecutor.getProducts({
-    name, sortBy, sortOrder, limit, offset,
+    name, categoryId, sortBy, sortOrder, limit, offset,
   });
   const products = productHelper.filterAndMapProducts(rows, ['total']);
   return products;
