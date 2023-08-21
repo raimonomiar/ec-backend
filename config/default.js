@@ -52,6 +52,7 @@ module.exports = {
     DEFAULT_LIMIT: 10,
     DEFAULT_OFFSET: 0,
     CLS_KEY_USER: 'user',
+    FILE_UPLOAD_PATH: process.env.FILE_UPLOAD_PATH || '/uploads',
   },
   logger: {
     APP_LOG_PATH: process.env.APP_LOG_PATH || 'default.log',
