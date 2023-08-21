@@ -11,4 +11,8 @@ module.exports = {
     code: 'INVALID_TOKEN',
     message: 'トークンが無効です',
   },
+  FORBIDDEN: {
+    code: 'INSUFFICIENT_PERMISSIONS',
+    message: '権限がありません',
+  },
 };
