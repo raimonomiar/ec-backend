@@ -6,6 +6,7 @@ const getToken = require('./getToken');
 const addCategory = require('./addCategory');
 const updateCategory = require('./updateCategory');
 const deleteCategory = require('./deleteCategory');
+const getCategory = require('./getCategory');
 const addProduct = require('./addProduct');
 const getProduct = require('./getProduct');
 
@@ -20,4 +21,5 @@ module.exports = {
   addCategory,
   updateCategory,
   deleteCategory,
+  getCategory,
 };
