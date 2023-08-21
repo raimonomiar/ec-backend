@@ -8,6 +8,7 @@ module.exports = {
     categoryId: { name: 'categoryId', colName: 'category_id' },
     frontImage: { name: 'frontImage', colName: 'front_image' },
     backImage: { name: 'backImage', colName: 'back_image' },
+    color: { name: 'color', colName: 'color' },
     createdBy: { name: 'createdBy', colName: 'created_by' },
     updatedBy: { name: 'updatedBy', colName: 'updated_by' },
     createdAt: { name: 'createdAt', colName: 'created_at' },

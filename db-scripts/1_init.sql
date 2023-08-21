@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS products (
     category_id BINARY(16),
     front_image VARCHAR(255) NOT NULL,
     back_image VARCHAR(255) NOT NULL,
+    color VARCHAR(20) NOT NULL,
     created_by BINARY(16),
     updated_by BINARY(16),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -50,7 +51,6 @@ CREATE TABLE IF NOT EXISTS inventories (
     product_id BINARY(16) NOT NULL,
     quantity INT NOT NULL,
     size VARCHAR(10) NOT NULL,
-    color VARCHAR(20) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES products(product_id)

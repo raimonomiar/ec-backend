@@ -1,0 +1,73 @@
+components:
+  schemas:
+    addProductRequest:
+      type: object
+      properties:
+        categoryId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        frontImage:
+          type: string
+          format: binary
+        backImage:
+          type: string
+          format: binary
+        color:
+          type: string
+      required:
+        - categoryId
+        - name
+        - description
+        - price
+        - frontImage
+        - backImage
+        - color
+    addProductResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    errorSchema:
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /products:
+    post:
+      tags:
+       - products
+      summary: Add Product
+      description: Add Product to the system
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/addProductRequest'
+      responses:
+        '201':
+          description: Request processed successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addProductResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+      security:
+        - bearerAuth: []
