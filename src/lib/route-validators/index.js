@@ -8,7 +8,6 @@ const getCategory = require('./getCategory');
 const postProduct = require('./postProduct');
 const accessValidator = require('./accessValidator');
 
-
 module.exports = {
   postUser,
   putUser,
