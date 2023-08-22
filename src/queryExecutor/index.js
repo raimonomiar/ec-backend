@@ -12,6 +12,7 @@ const {
   addProduct,
   getProduct,
   getCategory,
+  addInventory,
 } = queries;
 
 const insertIntoUsersTable = async (queryParams) => {
@@ -106,6 +107,14 @@ const getProductWithInventory = async (queryParams) => {
   return mysql.pool.query(selectProductWithInventoryCmd, selectProductWithInventoryArgs);
 };
 
+const insertIntoInventoryTable = async (queryParams) => {
+  const {
+    insertIntoInventoryCmd,
+    insertIntoInventoryArgs,
+  } = addInventory.getQueryParamsForInventories(queryParams);
+  return mysql.pool.query(insertIntoInventoryCmd, insertIntoInventoryArgs);
+};
+
 module.exports = {
   insertIntoUsersTable,
   getUserByEmail,
@@ -120,4 +129,5 @@ module.exports = {
   getCategories,
   getCategoryWithProduct,
   getProductWithInventory,
+  insertIntoInventoryTable,
 };

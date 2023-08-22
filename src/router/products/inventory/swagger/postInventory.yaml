@@ -1,0 +1,60 @@
+components:
+  schemas:
+    postInventoryRequest:
+      type: object
+      properties:
+        quantity:
+          type: number
+        size:
+          type: string
+    postInventoryResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    errorSchema:
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /products/{productId}/inventory:
+    post:
+      tags:
+        - inventory
+      summary: Add inventory
+      description: Add inventory to a product
+      parameters:
+        - name: productId
+          in: path
+          description: Product Id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postInventoryRequest'
+      responses:
+        '201':
+          description: Request processed successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/postInventoryResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/errorSchema'
+      security:
+        - bearerAuth: []
