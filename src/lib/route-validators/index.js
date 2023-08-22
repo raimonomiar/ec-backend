@@ -6,6 +6,7 @@ const postCategory = require('./postCategory');
 const updateCategory = require('./putCategory');
 const getCategory = require('./getCategory');
 const postProduct = require('./postProduct');
+const updateProduct = require('./putProducts');
 const accessValidator = require('./accessValidator');
 
 module.exports = {
@@ -18,4 +19,5 @@ module.exports = {
   getCategory,
   postProduct,
   accessValidator,
+  updateProduct,
 };

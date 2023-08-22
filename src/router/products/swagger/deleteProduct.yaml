@@ -1,0 +1,25 @@
+paths:
+  /products/{productId}:
+    delete:
+      tags:
+        - products
+      summary: Delete Product
+      description: Delete a product from the system
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: string
+          description: Product ID
+          required: true
+      responses:
+        '204':
+          description: Product deleted successfully!
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+      security:
+        - bearerAuth: []
