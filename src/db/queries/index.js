@@ -9,6 +9,7 @@ const deleteCategory = require('./deleteCategory');
 const getCategory = require('./getCategory');
 const addProduct = require('./addProduct');
 const getProduct = require('./getProduct');
+const addInventory = require('./addInventory');
 
 module.exports = {
   addUser,
@@ -22,4 +23,5 @@ module.exports = {
   updateCategory,
   deleteCategory,
   getCategory,
+  addInventory,
 };
