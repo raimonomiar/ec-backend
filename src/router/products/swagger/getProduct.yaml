@@ -92,7 +92,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getUserResponse'
+                $ref: '#/components/schemas/getProductsResponse'
         '500':
           description: Internal Server Error
           content:
