@@ -32,10 +32,10 @@ const selectProductWithInventory = `
     ${products.cols.price.colName} as ${products.cols.price.name},
     ${products.cols.frontImage.colName} as ${products.cols.frontImage.name},
     ${products.cols.backImage.colName} as ${products.cols.backImage.name},
-    ${products.cols.color.colName} as ${products.cols.color.name}
+    ${products.cols.color.colName} as ${products.cols.color.name},
     BIN_TO_UUID(${inventories.cols.inventoryId.colName}) as ${inventories.cols.inventoryId.name},
     ${inventories.cols.quantity.colName} as ${inventories.cols.quantity.name},
-    ${inventories.cols.size.colName} as ${inventories.cols.size.name},
+    ${inventories.cols.size.colName} as ${inventories.cols.size.name}
   FROM ${products.table}
   INNER JOIN ${inventories.table}
   ON ${products.table}.${products.cols.productId.colName} = ${inventories.table}.${inventories.cols.productId.colName}

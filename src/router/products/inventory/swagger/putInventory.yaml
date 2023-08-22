@@ -1,13 +1,13 @@
 components:
   schemas:
-    postInventoryRequest:
+    putInventoryRequest:
       type: object
       properties:
         quantity:
           type: number
         size:
           type: string
-    postInventoryResponse:
+    putInventoryResponse:
       type: object
       properties:
         message:
@@ -24,16 +24,22 @@ components:
       scheme: bearer
       bearerFormat: JWT
 paths:
-  /products/{productId}/inventory:
-    post:
+  /products/{productId}/inventory/{inventoryId}:
+    put:
       tags:
         - inventory
-      summary: Add inventory
-      description: Add inventory to a product
+      summary: Update inventory
+      description: Update inventory of a product
       parameters:
         - name: productId
           in: path
           description: Product Id
+          required: true
+          schema:
+            type: string
+        - name: inventoryId
+          in: path
+          description: Inventory Id
           required: true
           schema:
             type: string
@@ -42,14 +48,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/postInventoryRequest'
+              $ref: '#/components/schemas/putInventoryRequest'
       responses:
-        '201':
+        '204':
           description: Request processed successfully!
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/postInventoryResponse'
+                $ref: '#/components/schemas/putInventoryResponse'
         '400':
           description: Bad Request
           content:
