@@ -14,6 +14,8 @@ const {
   getCategory,
   updateProduct,
   deleteProduct,
+  addInventory,
+  updateInventory,
 } = queries;
 
 const insertIntoUsersTable = async (queryParams) => {
@@ -112,7 +114,6 @@ const updateProductInTable = async (queryParams) => {
   const { updateProductNameCmd, updateProductNameArgs } = updateProduct.getQueryParamsForUpdateProduct(queryParams);
   await mysql.pool.query(updateProductNameCmd, updateProductNameArgs);
 };
-
 const deleteProductFromTable = async (queryParams) => {
   // eslint-disable-next-line max-len
   const {
@@ -121,6 +122,22 @@ const deleteProductFromTable = async (queryParams) => {
   } = deleteProduct.getQueryParamsForDeleteProduct(queryParams);
   await mysql.pool.query(deleteProductNameCmd, deleteProductNameArgs);
 };
+const insertIntoInventoryTable = async (queryParams) => {
+  const {
+    insertIntoInventoryCmd,
+    insertIntoInventoryArgs,
+  } = addInventory.getQueryParamsForInventories(queryParams);
+  return mysql.pool.query(insertIntoInventoryCmd, insertIntoInventoryArgs);
+};
+
+const updateInventoryTable = async (queryParams) => {
+  const {
+    updateInventoryCmd,
+    updateInventoryArgs,
+  } = updateInventory.getQueryParamsForInventory(queryParams);
+  return mysql.pool.query(updateInventoryCmd, updateInventoryArgs);
+};
+
 module.exports = {
   insertIntoUsersTable,
   getUserByEmail,
@@ -137,4 +154,6 @@ module.exports = {
   getProductWithInventory,
   updateProductInTable,
   deleteProductFromTable,
+  insertIntoInventoryTable,
+  updateInventoryTable,
 };
