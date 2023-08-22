@@ -16,7 +16,7 @@ async function closeResource() {
 
 const terminateServer = async (err) => {
   if (err) {
-    logger.error(err);
+    logger.error(err, err.stack);
   }
   await closeResource();
   process.nextTick(() => process.exit(1));
