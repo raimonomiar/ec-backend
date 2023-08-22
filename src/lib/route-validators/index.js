@@ -8,6 +8,7 @@ const getCategory = require('./getCategory');
 const postProduct = require('./postProduct');
 const accessValidator = require('./accessValidator');
 const postInventory = require('./postInventory');
+const putInventory = require('./putInventory');
 
 module.exports = {
   postUser,
@@ -20,4 +21,5 @@ module.exports = {
   postProduct,
   accessValidator,
   postInventory,
+  putInventory,
 };
