@@ -14,6 +14,7 @@ const {
   getCategory,
   addInventory,
   updateInventory,
+  deleteInventory,
 } = queries;
 
 const insertIntoUsersTable = async (queryParams) => {
@@ -124,6 +125,14 @@ const updateInventoryTable = async (queryParams) => {
   return mysql.pool.query(updateInventoryCmd, updateInventoryArgs);
 };
 
+const deleteInventoryTable = async (queryParams) => {
+  const {
+    deleteInventoryCmd,
+    deleteInventoryArgs,
+  } = deleteInventory.getQueryParamsForDeleteInventory(queryParams);
+  return mysql.pool.query(deleteInventoryCmd, deleteInventoryArgs);
+};
+
 module.exports = {
   insertIntoUsersTable,
   getUserByEmail,
@@ -140,4 +149,5 @@ module.exports = {
   getProductWithInventory,
   insertIntoInventoryTable,
   updateInventoryTable,
+  deleteInventoryTable,
 };

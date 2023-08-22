@@ -26,7 +26,14 @@ async function updateInventory(input) {
   });
 }
 
+async function deleteInventory(inventoryId) {
+  return queryExecutor.deleteInventoryTable({
+    inventoryId,
+  });
+}
+
 module.exports = {
   addInventory,
   updateInventory,
+  deleteInventory,
 };

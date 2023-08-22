@@ -37,7 +37,7 @@ const selectProductWithInventory = `
     ${inventories.cols.quantity.colName} as ${inventories.cols.quantity.name},
     ${inventories.cols.size.colName} as ${inventories.cols.size.name}
   FROM ${products.table}
-  INNER JOIN ${inventories.table}
+  LEFT JOIN ${inventories.table}
   ON ${products.table}.${products.cols.productId.colName} = ${inventories.table}.${inventories.cols.productId.colName}
   WHERE ${products.table}.${products.cols.productId.colName} = UUID_TO_BIN(?)
 `;
