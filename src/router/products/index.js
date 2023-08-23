@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const getProduct = require('./getProduct');
 const addProduct = require('./postProduct');
-const updateProduct = require('./updateProduct');
+const updateProduct = require('./putProduct');
 const deleteProduct = require('./deleteProduct');
 const { postInventory, putInventory } = require('./inventory');
 
