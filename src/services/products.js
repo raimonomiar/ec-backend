@@ -50,29 +50,6 @@ async function getProductWithInventories(queryParams) {
   return products;
 }
 
-// async function updateProduct(input) {
-//   const {
-//     productId,
-//     name,
-//     description,
-//     price,
-//     categoryId,
-//     frontImage,
-//     backImage,
-//     color,
-//   } = input;
-//   await queryExecutor.updateProductInTable({
-//     productId,
-//     name,
-//     description,
-//     price,
-//     categoryId,
-//     frontImage,
-//     backImage,
-//     color,
-//   });
-// }
-
 async function updateProduct(input) {
   const { productId } = input;
   let {
