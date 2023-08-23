@@ -111,8 +111,8 @@ const getProductWithInventory = async (queryParams) => {
 };
 const updateProductInTable = async (queryParams) => {
   // eslint-disable-next-line max-len
-  const { updateProductNameCmd, updateProductNameArgs } = updateProduct.getQueryParamsForUpdateProduct(queryParams);
-  await mysql.pool.query(updateProductNameCmd, updateProductNameArgs);
+  const { updateProductCmd, updateProductArgs } = updateProduct.getQueryParamsForUpdateProduct(queryParams);
+  await mysql.pool.query(updateProductCmd, updateProductArgs);
 };
 const deleteProductFromTable = async (queryParams) => {
   // eslint-disable-next-line max-len

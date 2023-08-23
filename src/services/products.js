@@ -1,3 +1,4 @@
+const { pickBy } = require('ramda');
 const queryExecutor = require('../queryExecutor');
 const {
   productHelper,
@@ -49,26 +50,38 @@ async function getProductWithInventories(queryParams) {
   return products;
 }
 
+// async function updateProduct(input) {
+//   const {
+//     productId,
+//     name,
+//     description,
+//     price,
+//     categoryId,
+//     frontImage,
+//     backImage,
+//     color,
+//   } = input;
+//   await queryExecutor.updateProductInTable({
+//     productId,
+//     name,
+//     description,
+//     price,
+//     categoryId,
+//     frontImage,
+//     backImage,
+//     color,
+//   });
+// }
+
 async function updateProduct(input) {
-  const {
-    productId,
-    name,
-    description,
-    price,
-    categoryId,
-    frontImage,
-    backImage,
-    color,
+  const { productId } = input;
+  let {
+    dataParams,
   } = input;
-  await queryExecutor.updateProductInTable({
+  dataParams = pickBy((val) => val !== undefined, dataParams);
+  return queryExecutor.updateProductInTable({
     productId,
-    name,
-    description,
-    price,
-    categoryId,
-    frontImage,
-    backImage,
-    color,
+    dataParams,
   });
 }
 

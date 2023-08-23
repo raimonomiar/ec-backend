@@ -1,27 +1,39 @@
+/* eslint-disable camelcase */
 const HttpStatusCode = require('http-status-codes');
 const { productService } = require('../../services');
+const {
+  updateProduct: {
+    schemaUpdateProduct,
+  },
+} = require('../../lib/route-validators');
 
-const updateProduct = async (req, res, next) => {
+const responseGenerator = async (req, res, next) => {
   try {
-    const {
-      name, description, price, categoryId, frontImage, backImage, color,
-    } = req.body;
     const { productId } = req.params;
-
-    await productService.updateProduct({
-      productId,
+    const {
       name,
       description,
       price,
-      categoryId,
-      frontImage,
-      backImage,
+      category_id,
+      front_image,
+      back_image,
       color,
+    } = req.body;
+
+    await productService.updateProduct({
+      productId,
+      dataParams: {
+        name,
+        description,
+        price,
+        category_id,
+        front_image,
+        back_image,
+        color,
+      },
     });
 
-    res.status(HttpStatusCode.NO_CONTENT).send({
-      message: 'Product updated successfully.',
-    });
+    res.status(HttpStatusCode.NO_CONTENT).send();
   } catch (error) {
     next(error);
   }
@@ -29,8 +41,11 @@ const updateProduct = async (req, res, next) => {
 
 module.exports = [
   {
-    route: '/:productId',
+    route: '/:categoryId/products/:productId',
     method: 'put',
-    middlewares: [updateProduct],
+    middlewares: [
+      schemaUpdateProduct,
+      responseGenerator,
+    ],
   },
 ];
