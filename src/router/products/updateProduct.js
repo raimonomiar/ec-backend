@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 const HttpStatusCode = require('http-status-codes');
 const { productService } = require('../../services');
 const {
@@ -14,9 +13,9 @@ const responseGenerator = async (req, res, next) => {
       name,
       description,
       price,
-      category_id,
-      front_image,
-      back_image,
+      categoryId,
+      frontImage,
+      backImage,
       color,
     } = req.body;
 
@@ -26,9 +25,9 @@ const responseGenerator = async (req, res, next) => {
         name,
         description,
         price,
-        category_id,
-        front_image,
-        back_image,
+        categoryId,
+        frontImage,
+        backImage,
         color,
       },
     });
