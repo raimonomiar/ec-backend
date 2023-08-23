@@ -10,6 +10,7 @@ const { postInventory, putInventory } = require('./inventory');
 
 const routesArr = [...getProduct, ...addProduct, ...updateProduct, ...deleteProduct, ...postInventory, ...putInventory];
 
+
 routesArr.forEach((routeConfig) => {
   router[routeConfig.method](routeConfig.route, ...routeConfig.middlewares);
 });

@@ -1,0 +1,59 @@
+components:
+  schemas:
+    deleteInventoryResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    errorSchema:
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /products/{productId}/inventory/{inventoryId}:
+    delete:
+      tags:
+        - inventory
+      summary: Delete inventory
+      description: Delete inventory of a product
+      parameters:
+        - name: productId
+          in: path
+          description: Product Id
+          required: true
+          schema:
+            type: string
+        - name: inventoryId
+          in: path
+          description: Inventory Id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Request processed successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteInventoryResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+      security:
+        - bearerAuth: []

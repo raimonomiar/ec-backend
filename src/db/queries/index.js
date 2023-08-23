@@ -13,6 +13,7 @@ const updateProduct = require('./updateProduct');
 const deleteProduct = require('./deleteProduct');
 const addInventory = require('./addInventory');
 const updateInventory = require('./updateInventory');
+const deleteInventory = require('./deleteInventory');
 
 module.exports = {
   addUser,
@@ -30,4 +31,5 @@ module.exports = {
   deleteProduct,
   addInventory,
   updateInventory,
+  deleteInventory,
 };
