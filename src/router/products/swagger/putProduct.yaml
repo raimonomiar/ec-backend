@@ -1,0 +1,31 @@
+paths:
+  /products/{productId}:
+    put:
+      tags:
+        - products
+      summary: Update Product
+      description: Update existing product details
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: string
+          description: Product ID
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateProductRequest'
+      responses:
+        '204':
+          description: Product updated successfully!
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+      security:
+        - bearerAuth: []
