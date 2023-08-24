@@ -5,11 +5,11 @@ const getProduct = require('./getProduct');
 const addProduct = require('./postProduct');
 const updateProduct = require('./putProduct');
 const deleteProduct = require('./deleteProduct');
-const { postInventory, putInventory } = require('./inventory');
+const { postInventory, putInventory, deleteInventory } = require('./inventory');
 
 const routesArr = [
   ...getProduct, ...addProduct, ...updateProduct, ...deleteProduct, ...postInventory,
-  ...putInventory,
+  ...putInventory, ...deleteInventory,
 ];
 
 routesArr.forEach((routeConfig) => {

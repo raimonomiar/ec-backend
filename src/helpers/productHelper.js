@@ -4,7 +4,7 @@ const {
   omit,
 } = require('ramda');
 
-const MAP_INVENTORY_COLS = ['inventoryId', 'quantity', 'size'];
+const MAP_INVENTORY_COLS = ['inventoryId', 'quantity', 'size', 'sku'];
 
 function filterAndMapProducts(rows, keyToFilter) {
   return {
