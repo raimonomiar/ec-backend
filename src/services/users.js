@@ -1,8 +1,10 @@
+/* eslint-disable max-len */
 const bcrypt = require('bcrypt');
 const {
   saltRound,
 } = require('config').get('constants');
 const queryExecutor = require('../queryExecutor');
+const { userHelper } = require('../helpers');
 
 async function addUser(input) {
   const {
@@ -49,6 +51,37 @@ async function updatePassword(input) {
 async function getUserByEmail(email) {
   return queryExecutor.getUserByEmail(email);
 }
+async function getAllUsers(queryParams = {}) {
+  const {
+    firstName,
+    lastName,
+    street,
+    zip,
+    phone,
+    city,
+    appartment,
+    createdAt,
+    createdBy,
+    updatedAt,
+    updatedBy,
+    sortBy,
+    sortOrder,
+    limit,
+    offset,
+  } = queryParams;
+  const rows = await queryExecutor.getAllUsers({
+    firstName, lastName, street, zip, phone, city, appartment, createdAt, createdBy, updatedAt, updatedBy, sortBy, sortOrder, limit, offset,
+  });
+  const users = userHelper.filterAndMapAllUsers(rows, ['total']);
+  return users;
+}
+
+async function getUsersById(queryParams) {
+  const { userId } = queryParams;
+  const rows = await queryExecutor.getAllUserWithId(userId);
+  const users = userHelper.filterAndMapAllUsers(rows, ['total']);
+  return users;
+}
 
 async function validatePassword(input) {
   const { email, password } = input;
@@ -73,5 +106,7 @@ module.exports = {
   addUser,
   validatePassword,
   getUserByEmail,
+  getAllUsers,
+  getUsersById,
   updatePassword,
 };

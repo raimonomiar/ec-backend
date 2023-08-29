@@ -34,6 +34,21 @@ const insertIntoCategoryTable = async (queryParams) => {
   } = addCategory.getQueryParamsForCategory(queryParams);
   await mysql.pool.query(insertIntoCategoryCmd, insertIntoCategoryArgs);
 };
+const getAllUsers = async (queryParams) => {
+  const {
+    selectUsersWithPaginationCmd,
+    selectUsersWithPaginationArgs,
+  } = getUser.getQueryParamsForUsers(queryParams);
+  return mysql.pool.query(selectUsersWithPaginationCmd, selectUsersWithPaginationArgs);
+};
+
+const getAllUserWithId = async (queryParams) => {
+  const {
+    selectUserCmd,
+    selectUserArgs,
+  } = getUser.getAllUser(queryParams);
+  return mysql.pool.query(selectUserCmd, selectUserArgs);
+};
 
 const updateCategoryInTable = async (queryParams) => {
   // eslint-disable-next-line max-len
@@ -166,4 +181,6 @@ module.exports = {
   insertIntoInventoryTable,
   updateInventoryTable,
   deleteInventoryTable,
+  getAllUsers,
+  getAllUserWithId,
 };

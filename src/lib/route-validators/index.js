@@ -1,5 +1,6 @@
 const postUser = require('./postUser');
 const putUser = require('./putUser');
+const getUser = require('./getUser');
 const auth = require('./auth');
 const getProduct = require('./getProduct');
 const postCategory = require('./postCategory');
@@ -26,4 +27,5 @@ module.exports = {
   postInventory,
   putInventory,
   deleteInventory,
+  getUser,
 };

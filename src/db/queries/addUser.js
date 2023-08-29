@@ -22,7 +22,6 @@ const getQueryParamsForUsers = (
     email,
     firstName,
     lastName,
-    passwordHash,
     street,
     zip,
     phone,
@@ -34,7 +33,7 @@ const getQueryParamsForUsers = (
   } = input;
 
   const queryArgs = [
-    email, firstName, lastName, passwordHash, street, zip, phone, isAdmin, city, appartment,
+    email, firstName, lastName, street, zip, phone, isAdmin, city, appartment,
     createdBy, updatedBy,
   ];
   return {
