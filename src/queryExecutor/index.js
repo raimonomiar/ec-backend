@@ -78,7 +78,7 @@ const getCategoryWithProduct = async (queryParams) => {
 };
 
 const getUserByEmail = async (email) => {
-  const { selectUserByEmailCmd, selectUserByEmailArgs } = getUser(email);
+  const { selectUserByEmailCmd, selectUserByEmailArgs } = getUser.getQueryParams(email);
   return mysql.pool.query(selectUserByEmailCmd, selectUserByEmailArgs);
 };
 

@@ -69,5 +69,5 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/errorSchema'
-      security:
+      Security:
         - bearerAuth: []

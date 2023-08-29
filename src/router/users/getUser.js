@@ -1,6 +1,9 @@
 const HttpStatusCode = require('http-status-codes');
 const { userService } = require('../../services');
 const {
+  accessValidator: {
+    checkAuthToken,
+  },
   getUser: {
     schemaGetUsers,
     schemaGetUser,
@@ -10,10 +13,10 @@ const {
 const getUsers = async (req, res, next) => {
   try {
     const {
-      firstName, lastName, sortBy, sortOrder, limit, offset,
+      search, sortBy, sortOrder, limit, offset,
     } = req.query;
     const users = await userService.getAllUsers({
-      firstName, lastName, sortBy, sortOrder, limit, offset,
+      searchParam: search, sortBy, sortOrder, limit, offset,
     });
     res.status(HttpStatusCode.OK).send(users);
   } catch (error) {
@@ -37,6 +40,7 @@ module.exports = [
     method: 'get',
     middlewares: [
       schemaGetUsers,
+      checkAuthToken,
       getUsers,
     ],
   },

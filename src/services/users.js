@@ -53,26 +53,16 @@ async function getUserByEmail(email) {
 }
 async function getAllUsers(queryParams = {}) {
   const {
-    firstName,
-    lastName,
-    street,
-    zip,
-    phone,
-    city,
-    appartment,
-    createdAt,
-    createdBy,
-    updatedAt,
-    updatedBy,
+    searchParam,
     sortBy,
     sortOrder,
     limit,
     offset,
   } = queryParams;
   const rows = await queryExecutor.getAllUsers({
-    firstName, lastName, street, zip, phone, city, appartment, createdAt, createdBy, updatedAt, updatedBy, sortBy, sortOrder, limit, offset,
+    searchParam, sortBy, sortOrder, limit, offset,
   });
-  const users = userHelper.filterAndMapAllUsers(rows, ['total']);
+  const users = userHelper.filterAndMapUsers(rows, ['total']);
   return users;
 }
 

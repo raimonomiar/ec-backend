@@ -1,0 +1,95 @@
+components:
+  schemas:
+    getUsersResponse:
+      type: object
+      properties:
+        total:
+          type: number
+        data:
+          type: array
+          items:
+            properties:
+              userId:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string
+              phone:
+                type: string
+              street:
+                type: string
+              city:
+                type: string
+              appartment:
+                type: string
+              zip:
+                type: string
+    errorSchema:
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /users:
+    get:
+      tags:
+       - users
+      summary: Get Users
+      description: Get Users from the system
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          required: false
+          description: Search string
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Number of items per page
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Current page
+        - in: query
+          name: sortBy
+          schema:
+            type: string
+          description: Sort by field
+        - in: query
+          name: sortOrder
+          schema:
+            type: string
+          description: Sort order (asc, desc)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUsersResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+      security:
+        - bearerAuth: []

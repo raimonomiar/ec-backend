@@ -10,11 +10,15 @@ const {
 const sortByFields = [
   'firstName',
   'lastName',
+  'email',
 ];
 
 const schemaGetUsers = {
+  headers: joi.object({
+    authorization: joi.string().regex(/Bearer\s[A-Za-z0-9\-._~+/]+=*/).required(),
+  }),
   query: joi.object({
-    name: joi.string().max(255),
+    search: joi.string().max(255),
     sortBy: joi.string()
       .valid(sortByFields)
       .insensitive()
