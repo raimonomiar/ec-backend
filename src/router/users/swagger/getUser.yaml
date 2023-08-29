@@ -17,16 +17,27 @@ components:
                 type: string
               email:
                 type: string
-              phone:
-                type: string
-              street:
-                type: string
-              city:
-                type: string
-              appartment:
-                type: string
-              zip:
-                type: string
+    getUserResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        zip:
+          type: string
+        phone:
+          type: string
+        appartment:
+          type: string
     errorSchema:
       properties:
         message:
@@ -81,6 +92,46 @@ paths:
                 $ref: '#/components/schemas/getUsersResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+      security:
+        - bearerAuth: []
+  /users/{userId}:
+    get:
+      tags:
+       - users
+      summary: Get User
+      description: Get User from the system
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: User ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUserResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+        '404':
+          description: Not Found
           content:
             application/json:
               schema:

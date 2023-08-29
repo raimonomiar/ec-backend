@@ -1,4 +1,5 @@
 const HttpStatusCode = require('http-status-codes');
+const { isNil } = require('ramda');
 const { userService } = require('../../services');
 const {
   accessValidator: {
@@ -28,9 +29,12 @@ const getUserUsingId = async (req, res, next) => {
   try {
     const { userId } = req.params;
     const user = await userService.getUsersById({ userId });
-    res.status(HttpStatusCode.OK).send(user);
+    if (isNil(user)) {
+      return res.status(HttpStatusCode.NOT_FOUND).send();
+    }
+    return res.status(HttpStatusCode.OK).send(user);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -49,6 +53,7 @@ module.exports = [
     method: 'get',
     middlewares: [
       schemaGetUser,
+      checkAuthToken,
       getUserUsingId,
     ],
   },

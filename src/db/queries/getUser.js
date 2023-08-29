@@ -36,20 +36,17 @@ const selectUsersWithPagination = (searchParam) => `
   ${searchClause(searchParam)}
 `;
 
-const selectUserWithId = `
+const selectUserById = `
   SELECT
     BIN_TO_UUID(${users.table}.${users.cols.userId.colName}) as ${users.cols.userId.name},
           ${users.cols.firstName.colName} as ${users.cols.firstName.name},
           ${users.cols.lastName.colName} as ${users.cols.lastName.name},
           ${users.cols.street.colName} as ${users.cols.street.name},
+          ${users.cols.email.colName} as ${users.cols.email.name},
           ${users.cols.zip.colName} as ${users.cols.zip.name},
           ${users.cols.phone.colName} as ${users.cols.phone.name},
           ${users.cols.city.colName} as ${users.cols.city.name},
-          ${users.cols.appartment.colName} as ${users.cols.appartment.name},
-          ${users.cols.createdAt.colName} as ${users.cols.createdAt.name},
-          ${users.cols.createdBy.colName} as ${users.cols.createdBy.name},
-          ${users.cols.updatedAt.colName} as ${users.cols.updatedAt.name},
-          ${users.cols.updatedBy.colName} as ${users.cols.updatedBy.name}
+          ${users.cols.appartment.colName} as ${users.cols.appartment.name}
   FROM ${users.table}
   WHERE ${users.table}.${users.cols.userId.colName} = UUID_TO_BIN(?)
 `;
@@ -71,10 +68,10 @@ const getQueryParamsForUsers = ({
   };
 };
 
-const getAllUser = (userId) => {
+const getQueryParamsForUser = (userId) => {
   const queryArgs = [userId];
   return {
-    selectUserCmd: selectUserWithId,
+    selectUserCmd: selectUserById,
     selectUserArgs: queryArgs,
   };
 };
@@ -88,4 +85,4 @@ const getQueryParams = (email) => {
   };
 };
 
-module.exports = { getQueryParams, getQueryParamsForUsers, getAllUser };
+module.exports = { getQueryParams, getQueryParamsForUsers, getQueryParamsForUser };

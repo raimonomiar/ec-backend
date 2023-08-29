@@ -42,22 +42,26 @@ const getAllUsers = async (queryParams) => {
   return mysql.pool.query(selectUsersWithPaginationCmd, selectUsersWithPaginationArgs);
 };
 
-const getAllUserWithId = async (queryParams) => {
+const getUserById = async (queryParams) => {
   const {
     selectUserCmd,
     selectUserArgs,
-  } = getUser.getAllUser(queryParams);
+  } = getUser.getQueryParamsForUser(queryParams);
   return mysql.pool.query(selectUserCmd, selectUserArgs);
 };
 
 const updateCategoryInTable = async (queryParams) => {
-  // eslint-disable-next-line max-len
-  const { updateCategoryNameCmd, updateCategoryNameArgs } = updateCategory.getQueryParamsForUpdateCategory(queryParams);
+  const {
+    updateCategoryNameCmd,
+    updateCategoryNameArgs,
+  } = updateCategory.getQueryParamsForUpdateCategory(queryParams);
   await mysql.pool.query(updateCategoryNameCmd, updateCategoryNameArgs);
 };
 const deleteCategoryFromTable = async (queryParams) => {
-  // eslint-disable-next-line max-len
-  const { deleteCategoryNameCmd, deleteCategoryNameArgs } = deleteCategory.getQueryParamsForDeleteCategory(queryParams);
+  const {
+    deleteCategoryNameCmd,
+    deleteCategoryNameArgs,
+  } = deleteCategory.getQueryParamsForDeleteCategory(queryParams);
   await mysql.pool.query(deleteCategoryNameCmd, deleteCategoryNameArgs);
 };
 
@@ -126,12 +130,13 @@ const getProductWithInventory = async (queryParams) => {
   return mysql.pool.query(selectProductWithInventoryCmd, selectProductWithInventoryArgs);
 };
 const updateProductInTable = async (queryParams) => {
-  // eslint-disable-next-line max-len
-  const { updateProductCmd, updateProductArgs } = updateProduct.getQueryParamsForUpdateProduct(queryParams);
+  const {
+    updateProductCmd,
+    updateProductArgs,
+  } = updateProduct.getQueryParamsForUpdateProduct(queryParams);
   await mysql.pool.query(updateProductCmd, updateProductArgs);
 };
 const deleteProductFromTable = async (queryParams) => {
-  // eslint-disable-next-line max-len
   const {
     deleteProductNameCmd,
     deleteProductNameArgs,
@@ -182,5 +187,5 @@ module.exports = {
   updateInventoryTable,
   deleteInventoryTable,
   getAllUsers,
-  getAllUserWithId,
+  getUserById,
 };

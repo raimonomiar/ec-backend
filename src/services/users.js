@@ -68,9 +68,8 @@ async function getAllUsers(queryParams = {}) {
 
 async function getUsersById(queryParams) {
   const { userId } = queryParams;
-  const rows = await queryExecutor.getAllUserWithId(userId);
-  const users = userHelper.filterAndMapAllUsers(rows, ['total']);
-  return users;
+  const [row] = await queryExecutor.getUserById(userId);
+  return row;
 }
 
 async function validatePassword(input) {
