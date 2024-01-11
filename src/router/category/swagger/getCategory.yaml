@@ -128,12 +128,8 @@ paths:
             schema:
               $ref: '#/components/schemas/updateCategoryRequest'
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/updateCategoryResponse'
+        '204':
+          description: No Content
         '400':
           description: Bad Request
           content:
@@ -193,48 +189,23 @@ components:
     categoryData:
       type: object
       properties:
+        categoryId:
+          type: string
         name:
-          type: string
-        description:
-          type: string
-        price:
-          type: number
-        frontImage:
-          type: string
-        backImage:
           type: string
     createCategoryRequest:
       type: object
       properties:
         name:
           type: string
-        description:
-          type: string
-        price:
-          type: number
-        frontImage:
-          type: string
-        backImage:
-          type: string
     createCategoryResponse:
       type: object
-      properties:
-        categoryId:
-          type: string
     getCategoryResponse:
       $ref: '#/components/schemas/categoryData'
     updateCategoryRequest:
       type: object
       properties:
         name:
-          type: string
-        description:
-          type: string
-        price:
-          type: number
-        frontImage:
-          type: string
-        backImage:
           type: string
     updateCategoryResponse:
       $ref: '#/components/schemas/categoryData'
