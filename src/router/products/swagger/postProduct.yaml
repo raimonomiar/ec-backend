@@ -11,7 +11,7 @@ components:
           type: string
         price:
           type: number
-     required:
+      required:
         - categoryId
         - name
         - description

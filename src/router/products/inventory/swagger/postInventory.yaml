@@ -15,7 +15,7 @@ components:
           format: binary
         color:
           type: string
- postInventoryResponse:
+    postInventoryResponse:
       type: object
       properties:
         message:
