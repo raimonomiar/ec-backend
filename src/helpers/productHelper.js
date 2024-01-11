@@ -4,7 +4,15 @@ const {
   omit,
 } = require('ramda');
 
-const MAP_INVENTORY_COLS = ['inventoryId', 'quantity', 'size', 'sku'];
+const MAP_INVENTORY_COLS = [
+  'inventoryId',
+  'quantity',
+  'size',
+  'sku',
+  'color',
+  'frontImage',
+  'backImage',
+];
 
 function filterAndMapProducts(rows, keyToFilter) {
   return {
@@ -22,9 +30,6 @@ function filterAndMapProductsAndInventory(rows) {
       name: _.head(group).name,
       description: _.head(group).description,
       price: _.head(group).price,
-      frontImage: _.head(group).frontImage,
-      backImage: _.head(group).backImage,
-      color: _.head(group).color,
       inventories: _.map(group, (item) => _.pick(item, MAP_INVENTORY_COLS)),
     }));
 }

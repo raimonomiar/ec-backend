@@ -12,12 +12,21 @@ const {
 const responseGenerator = async (req, res, next) => {
   try {
     const { inventoryId } = req.params;
-    const { quantity, size } = req.body;
+    const {
+      quantity,
+      size,
+      frontImage,
+      backImage,
+      color,
+    } = req.body;
     await inventoryService.updateInventory({
       inventoryId,
       dataParams: {
         quantity,
         size,
+        frontImage,
+        backImage,
+        color,
       },
     });
     res.status(HttpStatusCode.NO_CONTENT).send();

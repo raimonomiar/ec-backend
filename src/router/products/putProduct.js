@@ -14,9 +14,6 @@ const responseGenerator = async (req, res, next) => {
       description,
       price,
       categoryId,
-      frontImage,
-      backImage,
-      color,
     } = req.body;
 
     await productService.updateProduct({
@@ -26,9 +23,6 @@ const responseGenerator = async (req, res, next) => {
         description,
         price,
         categoryId,
-        frontImage,
-        backImage,
-        color,
       },
     });
 

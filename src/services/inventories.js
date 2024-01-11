@@ -18,6 +18,9 @@ async function addInventory(input) {
     productId,
     quantity,
     size,
+    frontImage,
+    backImage,
+    color,
   } = input;
   const sku = generateSKU(size);
   return queryExecutor.insertIntoInventoryTable({
@@ -25,6 +28,9 @@ async function addInventory(input) {
     quantity,
     size,
     sku,
+    frontImage,
+    backImage,
+    color,
   });
 }
 

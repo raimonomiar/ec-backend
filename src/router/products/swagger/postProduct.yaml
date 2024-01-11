@@ -11,22 +11,11 @@ components:
           type: string
         price:
           type: number
-        frontImage:
-          type: string
-          format: binary
-        backImage:
-          type: string
-          format: binary
-        color:
-          type: string
-      required:
+     required:
         - categoryId
         - name
         - description
         - price
-        - frontImage
-        - backImage
-        - color
     addProductResponse:
       type: object
       properties:

@@ -10,9 +10,6 @@ async function addProduct(input) {
     description,
     price,
     categoryId,
-    frontImage,
-    backImage,
-    color,
     createdBy,
   } = input;
   return queryExecutor.insertIntoProductsTable({
@@ -20,9 +17,6 @@ async function addProduct(input) {
     description,
     price,
     categoryId,
-    frontImage,
-    backImage,
-    color,
     createdBy,
   });
 }

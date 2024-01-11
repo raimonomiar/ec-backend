@@ -7,7 +7,15 @@ components:
           type: number
         size:
           type: string
-    postInventoryResponse:
+        frontImage:
+          type: string
+          format: binary
+        backImage:
+          type: string
+          format: binary
+        color:
+          type: string
+ postInventoryResponse:
       type: object
       properties:
         message:
