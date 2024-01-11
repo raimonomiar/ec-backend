@@ -35,22 +35,22 @@ const insertIntoCategoryTable = async (queryParams) => {
   await mysql.pool.query(insertIntoCategoryCmd, insertIntoCategoryArgs);
 };
 
-const updateCategoryInTable = async (queryParams) => {
+const updateCategoryInTable = (queryParams) => {
   const {
     updateCategoryNameCmd,
     updateCategoryNameArgs,
   } = updateCategory.getQueryParamsForUpdateCategory(queryParams);
-  await mysql.pool.query(updateCategoryNameCmd, updateCategoryNameArgs);
+  return mysql.pool.query(updateCategoryNameCmd, updateCategoryNameArgs);
 };
-const deleteCategoryFromTable = async (queryParams) => {
+const deleteCategoryFromTable = (queryParams) => {
   const {
     deleteCategoryNameCmd,
     deleteCategoryNameArgs,
   } = deleteCategory.getQueryParamsForDeleteCategory(queryParams);
-  await mysql.pool.query(deleteCategoryNameCmd, deleteCategoryNameArgs);
+  return mysql.pool.query(deleteCategoryNameCmd, deleteCategoryNameArgs);
 };
 
-const getCategories = async (queryParams) => {
+const getCategories = (queryParams) => {
   const {
     selectCategoriesWIthPaginationCmd,
     selectCategoriesWIthPaginationArgs,
@@ -58,20 +58,20 @@ const getCategories = async (queryParams) => {
   return mysql.pool.query(selectCategoriesWIthPaginationCmd, selectCategoriesWIthPaginationArgs);
 };
 
-const getCategoryWithProduct = async (queryParams) => {
+const getCategoryFromTable = (queryParams) => {
   const {
-    selectCategoryWithInventoryCmd,
-    selectCategoryWithInventoryArgs,
-  } = getCategory.getQueryParamsForCategoryWithProduct(queryParams);
-  return mysql.pool.query(selectCategoryWithInventoryCmd, selectCategoryWithInventoryArgs);
+    selectCategoryCmd,
+    selectCategoryArgs,
+  } = getCategory.getQueryParamsForCategory(queryParams);
+  return mysql.pool.query(selectCategoryCmd, selectCategoryArgs);
 };
 
-const getUserByEmail = async (email) => {
+const getUserByEmail = (email) => {
   const { selectUserByEmailCmd, selectUserByEmailArgs } = getUser(email);
   return mysql.pool.query(selectUserByEmailCmd, selectUserByEmailArgs);
 };
 
-const updatePassword = async (queryParams) => {
+const updatePassword = (queryParams) => {
   const {
     updatePasswordCmd,
     updatePasswordArgs,
@@ -86,12 +86,12 @@ const insertIntoTokensTable = (queryParams) => {
   return mysql.pool.query(insertIntoTokensCmd, insertIntoTokensArgs);
 };
 
-const getResetPasswordToken = async (queryParams) => {
+const getResetPasswordToken = (queryParams) => {
   const { selectTokenCmd, selectTokenArgs } = getToken(queryParams);
   return mysql.pool.query(selectTokenCmd, selectTokenArgs);
 };
 
-const insertIntoProductsTable = async (queryParams) => {
+const insertIntoProductsTable = (queryParams) => {
   const {
     insertIntoProductsCmd,
     insertIntoProductsArgs,
@@ -99,7 +99,7 @@ const insertIntoProductsTable = async (queryParams) => {
   return mysql.pool.query(insertIntoProductsCmd, insertIntoProductsArgs);
 };
 
-const getProducts = async (queryParams) => {
+const getProducts = (queryParams) => {
   const {
     selectProductsWIthPaginationCmd,
     selectProductsWIthPaginationArgs,
@@ -107,28 +107,28 @@ const getProducts = async (queryParams) => {
   return mysql.pool.query(selectProductsWIthPaginationCmd, selectProductsWIthPaginationArgs);
 };
 
-const getProductWithInventory = async (queryParams) => {
+const getProductWithInventory = (queryParams) => {
   const {
     selectProductWithInventoryCmd,
     selectProductWithInventoryArgs,
   } = getProduct.getQueryParamsForProductWithInventory(queryParams);
   return mysql.pool.query(selectProductWithInventoryCmd, selectProductWithInventoryArgs);
 };
-const updateProductInTable = async (queryParams) => {
+const updateProductInTable = (queryParams) => {
   const {
     updateProductCmd,
     updateProductArgs,
   } = updateProduct.getQueryParamsForUpdateProduct(queryParams);
-  await mysql.pool.query(updateProductCmd, updateProductArgs);
+  mysql.pool.query(updateProductCmd, updateProductArgs);
 };
-const deleteProductFromTable = async (queryParams) => {
+const deleteProductFromTable = (queryParams) => {
   const {
     deleteProductNameCmd,
     deleteProductNameArgs,
   } = deleteProduct.getQueryParamsForDeleteProduct(queryParams);
-  await mysql.pool.query(deleteProductNameCmd, deleteProductNameArgs);
+  mysql.pool.query(deleteProductNameCmd, deleteProductNameArgs);
 };
-const insertIntoInventoryTable = async (queryParams) => {
+const insertIntoInventoryTable = (queryParams) => {
   const {
     insertIntoInventoryCmd,
     insertIntoInventoryArgs,
@@ -164,7 +164,7 @@ module.exports = {
   updateCategoryInTable,
   deleteCategoryFromTable,
   getCategories,
-  getCategoryWithProduct,
+  getCategoryFromTable,
   getProductWithInventory,
   updateProductInTable,
   deleteProductFromTable,

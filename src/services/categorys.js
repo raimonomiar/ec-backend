@@ -12,13 +12,13 @@ async function addToCategory(input) {
 
 async function updateCategory(input) {
   const { categoryId, name } = input;
-  await queryExecutor.updateCategoryInTable({
+  return queryExecutor.updateCategoryInTable({
     categoryId, name,
   });
 }
 
-async function deleteCategoryById(categoryId) {
-  await queryExecutor.deleteCategoryFromTable(categoryId);
+function deleteCategoryById(categoryId) {
+  return queryExecutor.deleteCategoryFromTable(categoryId);
 }
 
 async function getCategories(queryParams = {}) {
@@ -36,9 +36,14 @@ async function getCategories(queryParams = {}) {
   return categories;
 }
 
+async function getCategoryById(categoryId) {
+  return queryExecutor.getCategoryFromTable(categoryId);
+}
+
 module.exports = {
   addToCategory,
   updateCategory,
   deleteCategoryById,
   getCategories,
+  getCategoryById,
 };

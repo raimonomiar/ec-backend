@@ -16,6 +16,14 @@ const selectCategoriesWIthPagination = (name) => `
   GROUP BY ${category.cols.categoryId.colName}
 `;
 
+const selectCategoryById = `
+  SELECT
+    BIN_TO_UUID(${category.cols.categoryId.colName}) as ${category.cols.categoryId.name},
+    ${category.cols.name.colName} as ${category.cols.name.name}
+  FROM ${category.table}
+  WHERE BIN_TO_UUID(${category.cols.categoryId.colName}) = ?
+`;
+
 const getQueryParamsForCategories = ({
   name, sortBy, sortOrder, limit, offset,
 }) => {
@@ -33,6 +41,17 @@ const getQueryParamsForCategories = ({
   };
 };
 
+const getQueryParamsForCategory = (
+  categoryId,
+) => {
+  const queryArgs = [categoryId];
+  return {
+    selectCategoryCmd: selectCategoryById,
+    selectCategoryArgs: queryArgs,
+  };
+};
+
 module.exports = {
   getQueryParamsForCategories,
+  getQueryParamsForCategory,
 };

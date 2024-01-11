@@ -14,5 +14,4 @@ function filterAndMapCategories(rows, keyToFilter) {
 
 module.exports = {
   filterAndMapCategories,
-
 };
