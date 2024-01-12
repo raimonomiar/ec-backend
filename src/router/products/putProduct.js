@@ -16,7 +16,7 @@ const responseGenerator = async (req, res, next) => {
       categoryId,
     } = req.body;
 
-    await productService.updateProduct({
+    const result = await productService.updateProduct({
       productId,
       dataParams: {
         name,
@@ -26,6 +26,10 @@ const responseGenerator = async (req, res, next) => {
       },
     });
 
+    if (result.affectedRows === 0) {
+      res.status(HttpStatusCode.NOT_FOUND).send();
+    }
+
     res.status(HttpStatusCode.NO_CONTENT).send();
   } catch (error) {
     next(error);
@@ -34,7 +38,7 @@ const responseGenerator = async (req, res, next) => {
 
 module.exports = [
   {
-    route: '/:categoryId/products/:productId',
+    route: '/:productId',
     method: 'put',
     middlewares: [
       schemaUpdateProduct,

@@ -13,7 +13,7 @@ const selectProductsWIthPagination = (name, categoryId) => `
     BIN_TO_UUID(${products.cols.productId.colName}) as ${products.cols.productId.name},
     ${products.cols.name.colName} as ${products.cols.name.name},
     ${products.cols.description.colName} as ${products.cols.description.name},
-    ${products.cols.price.colName} as ${products.cols.price.name},
+    ${products.cols.price.colName} as ${products.cols.price.name}
   FROM ${products.table},
     (SELECT COUNT(${products.cols.productId.colName}) as total 
     FROM ${products.table} WHERE ${products.cols.createdBy.colName} IS NOT NULL) as P
@@ -30,7 +30,7 @@ const selectProductWithInventory = `
     BIN_TO_UUID(${inventories.cols.inventoryId.colName}) as ${inventories.cols.inventoryId.name},
     ${inventories.cols.quantity.colName} as ${inventories.cols.quantity.name},
     ${inventories.cols.size.colName} as ${inventories.cols.size.name},
-    ${inventories.cols.sku.colName} as ${inventories.cols.sku.name}
+    ${inventories.cols.sku.colName} as ${inventories.cols.sku.name},
     ${inventories.cols.frontImage.colName} as ${inventories.cols.frontImage.name},
     ${inventories.cols.backImage.colName} as ${inventories.cols.backImage.name},
     ${inventories.cols.color.colName} as ${inventories.cols.color.name}
