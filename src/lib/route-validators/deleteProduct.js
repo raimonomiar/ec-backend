@@ -7,13 +7,7 @@ const schema = {
   }),
   params: joi.object({
     productId: joi.string().guid().required(),
-    inventoryId: joi.string().guid().required(),
-  }).required(),
-  body: joi.object({
-    quantity: joi.number(),
-    size: joi.string().max(10),
-    color: joi.string().max(20),
-  }).required(),
+  }),
 };
 
 module.exports = {

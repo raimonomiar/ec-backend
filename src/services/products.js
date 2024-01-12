@@ -10,9 +10,6 @@ async function addProduct(input) {
     description,
     price,
     categoryId,
-    frontImage,
-    backImage,
-    color,
     createdBy,
   } = input;
   return queryExecutor.insertIntoProductsTable({
@@ -20,9 +17,6 @@ async function addProduct(input) {
     description,
     price,
     categoryId,
-    frontImage,
-    backImage,
-    color,
     createdBy,
   });
 }
@@ -50,7 +44,7 @@ async function getProductWithInventories(queryParams) {
   return products;
 }
 
-async function updateProduct(input) {
+function updateProduct(input) {
   const { productId } = input;
   let {
     dataParams,
@@ -62,8 +56,8 @@ async function updateProduct(input) {
   });
 }
 
-async function deleteProductById(productId) {
-  await queryExecutor.deleteProductFromTable(productId);
+function deleteProductById(productId) {
+  return queryExecutor.deleteProductFromTable(productId);
 }
 
 module.exports = {

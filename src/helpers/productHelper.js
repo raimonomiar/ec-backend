@@ -2,9 +2,18 @@ const _ = require('lodash');
 const {
   map,
   omit,
+  isEmpty,
 } = require('ramda');
 
-const MAP_INVENTORY_COLS = ['inventoryId', 'quantity', 'size', 'sku'];
+const MAP_INVENTORY_COLS = [
+  'inventoryId',
+  'quantity',
+  'size',
+  'sku',
+  'color',
+  'frontImage',
+  'backImage',
+];
 
 function filterAndMapProducts(rows, keyToFilter) {
   return {
@@ -14,7 +23,7 @@ function filterAndMapProducts(rows, keyToFilter) {
 }
 
 function filterAndMapProductsAndInventory(rows) {
-  return _.chain(rows)
+  return isEmpty(rows) ? rows : _.chain(rows)
     .groupBy('productId')
     .values()
     .map((group) => ({
@@ -22,10 +31,8 @@ function filterAndMapProductsAndInventory(rows) {
       name: _.head(group).name,
       description: _.head(group).description,
       price: _.head(group).price,
-      frontImage: _.head(group).frontImage,
-      backImage: _.head(group).backImage,
-      color: _.head(group).color,
-      inventories: _.map(group, (item) => _.pick(item, MAP_INVENTORY_COLS)),
+      inventories: _.head(group).inventoryId === null
+        ? [] : _.map(group, (item) => _.pick(item, MAP_INVENTORY_COLS)),
     }));
 }
 

@@ -11,22 +11,11 @@ components:
           type: string
         price:
           type: number
-        frontImage:
-          type: string
-          format: binary
-        backImage:
-          type: string
-          format: binary
-        color:
-          type: string
       required:
         - categoryId
         - name
         - description
         - price
-        - frontImage
-        - backImage
-        - color
     addProductResponse:
       type: object
       properties:
@@ -53,7 +42,7 @@ paths:
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          application/json:
             schema:
               $ref: '#/components/schemas/addProductRequest'
       responses:

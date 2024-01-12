@@ -1,4 +1,5 @@
 const HttpStatusCode = require('http-status-codes');
+const { isEmpty } = require('ramda');
 const { productService } = require('../../services');
 const {
   getProduct: {
@@ -25,6 +26,9 @@ const getProduct = async (req, res, next) => {
   try {
     const { productId } = req.params;
     const product = await productService.getProductWithInventories({ productId });
+    if (isEmpty(product)) {
+      res.status(HttpStatusCode.NOT_FOUND).send();
+    }
     res.status(HttpStatusCode.OK).send(product);
   } catch (error) {
     next(error);

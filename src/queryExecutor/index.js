@@ -119,14 +119,14 @@ const updateProductInTable = (queryParams) => {
     updateProductCmd,
     updateProductArgs,
   } = updateProduct.getQueryParamsForUpdateProduct(queryParams);
-  mysql.pool.query(updateProductCmd, updateProductArgs);
+  return mysql.pool.query(updateProductCmd, updateProductArgs);
 };
 const deleteProductFromTable = (queryParams) => {
   const {
     deleteProductNameCmd,
     deleteProductNameArgs,
   } = deleteProduct.getQueryParamsForDeleteProduct(queryParams);
-  mysql.pool.query(deleteProductNameCmd, deleteProductNameArgs);
+  return mysql.pool.query(deleteProductNameCmd, deleteProductNameArgs);
 };
 const insertIntoInventoryTable = (queryParams) => {
   const {
