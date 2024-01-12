@@ -4,10 +4,10 @@ const insertIntoInventories = `INSERT INTO ${inventories.table}(
   ${inventories.cols.productId.colName},
   ${inventories.cols.quantity.colName},
   ${inventories.cols.size.colName},
-  ${inventories.cols.sku.colName}
+  ${inventories.cols.sku.colName},
   ${inventories.cols.frontImage.colName},
   ${inventories.cols.backImage.colName},
-  ${inventories.cols.color.colName},
+  ${inventories.cols.color.colName}
   ) VALUES (UUID_TO_BIN(?), ?, ?, ?, ?, ?, ?)`;
 
 const getQueryParamsForInventories = (
