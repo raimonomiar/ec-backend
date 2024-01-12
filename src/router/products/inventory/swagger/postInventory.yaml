@@ -15,6 +15,12 @@ components:
           format: binary
         color:
           type: string
+      required:
+        -  quantity
+        -  size
+        -  frontImage
+        -  backImage
+        -  color
     postInventoryResponse:
       type: object
       properties:
@@ -48,7 +54,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: '#/components/schemas/postInventoryRequest'
       responses:

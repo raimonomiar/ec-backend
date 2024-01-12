@@ -1,5 +1,5 @@
 const {
-  pickBy, times, pipe, join,
+  pickBy, times, pipe, join, isNil, isEmpty,
 } = require('ramda');
 const { SKU_LENGTH } = require('config').get('constants');
 const queryExecutor = require('../queryExecutor');
@@ -39,7 +39,7 @@ async function updateInventory(input) {
   let {
     dataParams,
   } = input;
-  dataParams = pickBy((val) => val !== undefined, dataParams);
+  dataParams = pickBy((val) => !isNil(val) && !isEmpty(val), dataParams);
   return queryExecutor.updateInventoryTable({
     inventoryId,
     dataParams,
