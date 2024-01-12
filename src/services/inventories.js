@@ -40,7 +40,6 @@ async function updateInventory(input) {
     dataParams,
   } = input;
   dataParams = pickBy((val) => !isNil(val) && !isEmpty(val), dataParams);
-  console.log(dataParams);
   return queryExecutor.updateInventoryTable({
     inventoryId,
     dataParams,
