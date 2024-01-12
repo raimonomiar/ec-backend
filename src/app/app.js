@@ -2,6 +2,7 @@ const express = require('express');
 const compression = require('compression');
 const config = require('config');
 const swaggerUi = require('swagger-ui-express');
+const cors = require('cors');
 const errorHandler = require('../lib/errors').handler;
 const router = require('../router');
 const swagger = require('../swagger');
@@ -17,6 +18,7 @@ const requestIdMiddleware = (req, res, next) => {
 
 const createApp = () => {
   const expressApp = express();
+  expressApp.use(cors());
   expressApp.use(requestIdMiddleware);
   expressApp.use(express.json({ limit: '50mb' }));
   expressApp.use(express.urlencoded({
