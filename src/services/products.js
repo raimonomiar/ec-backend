@@ -33,7 +33,6 @@ async function getProducts(queryParams = {}) {
   const rows = await queryExecutor.getProducts({
     name, categoryId, sortBy, sortOrder, limit, offset,
   });
-  console.log(rows);
   const products = productHelper.filterAndMapProducts(rows);
   return products;
 }
