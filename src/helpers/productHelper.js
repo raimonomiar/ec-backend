@@ -1,7 +1,5 @@
 const _ = require('lodash');
 const {
-  map,
-  omit,
   isEmpty,
 } = require('ramda');
 
@@ -15,9 +13,19 @@ const MAP_INVENTORY_COLS = [
   'backImage',
 ];
 
-function filterAndMapProducts(rows, keyToFilter) {
+function filterAndMapProducts(rows) {
+  const groupedProducts = _.groupBy(rows, 'productId');
+
+  const products = _.map(groupedProducts, (group) => ({
+    productId: group[0].productId,
+    name: group[0].name,
+    description: group[0].description,
+    price: group[0].price,
+    inventories: group.map(({ frontImage, backImage }) => ({ frontImage, backImage })),
+  }));
+
   return {
-    data: map(omit(keyToFilter), rows),
+    data: products,
     total: rows[0] && rows[0].total,
   };
 }

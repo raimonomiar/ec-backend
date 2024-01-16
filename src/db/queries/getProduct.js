@@ -10,14 +10,18 @@ const categoryIdClause = (categoryId) => (categoryId ? `AND ${products.cols.cate
 const selectProductsWIthPagination = (name, categoryId) => `
   SELECT
     P.total,
-    BIN_TO_UUID(${products.cols.productId.colName}) as ${products.cols.productId.name},
+    BIN_TO_UUID(PO.${products.cols.productId.colName}) as ${products.cols.productId.name},
     ${products.cols.name.colName} as ${products.cols.name.name},
     ${products.cols.description.colName} as ${products.cols.description.name},
-    ${products.cols.price.colName} as ${products.cols.price.name}
-  FROM ${products.table},
+    ${products.cols.price.colName} as ${products.cols.price.name},
+    ${inventories.cols.frontImage.colName} as ${inventories.cols.frontImage.name},
+    ${inventories.cols.backImage.colName} as ${inventories.cols.backImage.name}
+  FROM ${products.table} as PO
+  LEFT JOIN ${inventories.table} as I
+  ON PO.${products.cols.productId.colName} = I.${inventories.cols.productId.colName},
     (SELECT COUNT(${products.cols.productId.colName}) as total 
     FROM ${products.table} WHERE ${products.cols.createdBy.colName} IS NOT NULL) as P
-  WHERE ${products.table}.${products.cols.createdBy.colName} IS NOT NULL
+  WHERE PO.${products.cols.createdBy.colName} IS NOT NULL
   ${nameClause(name)}
   ${categoryIdClause(categoryId)}`;
 

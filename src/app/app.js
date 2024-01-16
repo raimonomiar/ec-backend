@@ -3,6 +3,7 @@ const compression = require('compression');
 const config = require('config');
 const swaggerUi = require('swagger-ui-express');
 const cors = require('cors');
+const { FILE_UPLOAD_PATH } = require('config').get('constants');
 const errorHandler = require('../lib/errors').handler;
 const router = require('../router');
 const swagger = require('../swagger');
@@ -37,6 +38,7 @@ const createApp = () => {
     expressApp.use('/docs', swaggerUi.serve, swaggerUi.setup(swagger.load()));
   }
 
+  expressApp.use('/uploads', express.static(FILE_UPLOAD_PATH));
   expressApp.use(errorHandler.notFoundError());
   expressApp.use(errorHandler.httpError());
   expressApp.disable('x-powered-by');

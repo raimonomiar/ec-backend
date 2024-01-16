@@ -1,13 +1,11 @@
-const { products } = require('../schema');
+const { products, inventories } = require('../schema');
 
 const deleteProduct = `
-DELETE products, inventories
-FROM ${products.table} AS products
-LEFT JOIN inventories ON products.${products.cols.productId.colName} = inventories.product_id
-WHERE BIN_TO_UUID(products.${products.cols.productId.colName}) = ?`;
+DELETE FROM ${inventories.table} WHERE BIN_TO_UUID(${inventories.cols.productId.colName}) = ?;
+DELETE FROM ${products.table} WHERE BIN_TO_UUID(${products.cols.productId.colName}) = ?`;
 
 const getQueryParamsForDeleteProduct = (productId) => {
-  const queryArgs = [productId];
+  const queryArgs = [productId, productId];
   return {
     deleteProductNameCmd: deleteProduct,
     deleteProductNameArgs: queryArgs,
