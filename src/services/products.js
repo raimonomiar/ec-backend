@@ -10,6 +10,9 @@ async function addProduct(input) {
     description,
     price,
     categoryId,
+    frontImage,
+    backImage,
+    color,
     createdBy,
   } = input;
   return queryExecutor.insertIntoProductsTable({
@@ -17,6 +20,9 @@ async function addProduct(input) {
     description,
     price,
     categoryId,
+    frontImage,
+    backImage,
+    color,
     createdBy,
   });
 }
@@ -33,7 +39,7 @@ async function getProducts(queryParams = {}) {
   const rows = await queryExecutor.getProducts({
     name, categoryId, sortBy, sortOrder, limit, offset,
   });
-  const products = productHelper.filterAndMapProducts(rows);
+  const products = productHelper.filterAndMapProducts(rows, ['total']);
   return products;
 }
 
@@ -44,7 +50,7 @@ async function getProductWithInventories(queryParams) {
   return products;
 }
 
-function updateProduct(input) {
+async function updateProduct(input) {
   const { productId } = input;
   let {
     dataParams,
@@ -56,8 +62,8 @@ function updateProduct(input) {
   });
 }
 
-function deleteProductById(productId) {
-  return queryExecutor.deleteProductFromTable(productId);
+async function deleteProductById(productId) {
+  await queryExecutor.deleteProductFromTable(productId);
 }
 
 module.exports = {

@@ -11,6 +11,12 @@ components:
           type: string
         price:
           type: number
+        frontImage:
+          type: string
+          format: binary
+        backImage:
+          type: string
+          format: binary
         color:
           type: string
       required:
@@ -18,6 +24,8 @@ components:
         - name
         - description
         - price
+        - frontImage
+        - backImage
         - color
     addProductResponse:
       type: object
@@ -45,7 +53,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: '#/components/schemas/addProductRequest'
       responses:

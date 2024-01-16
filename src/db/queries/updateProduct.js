@@ -5,9 +5,9 @@ const updateProductQuery = (updateVal) => `
   SET ${updateVal}
   WHERE BIN_TO_UUID(${products.cols.productId.colName}) = ?`;
 
-const updateValue = (updateCol, entry) => (([products.cols.categoryId.name].includes(entry[0]))
-  ? `${updateCol + products.cols[entry[0]].colName} = UUID_TO_BIN(?) ,`
-  : `${updateCol + products.cols[entry[0]].colName} = ?,`);
+const updateValue = (updateCol, entry) => (([products.cols.categoryId].includes(entry[0]))
+  ? `${updateCol + entry[0]} = UUID_TO_BIN(?) ,`
+  : `${updateCol + entry[0]} = ?,`);
 
 const getQueryParamsForUpdateProduct = ({ productId, dataParams }) => {
   const productEntries = Object.entries(dataParams);

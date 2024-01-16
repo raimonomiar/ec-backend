@@ -5,7 +5,7 @@ const updateInventoryQuery = (updateVal) => `
   SET ${updateVal}
   WHERE BIN_TO_UUID(${inventories.cols.inventoryId.colName}) = ?`;
 
-const updateValue = (updateCol, entry) => `${updateCol + inventories.cols[entry[0]].colName} = ?,`;
+const updateValue = (updateCol, entry) => `${updateCol + entry[0]} = ?,`;
 
 const getQueryParamsForInventory = ({ inventoryId, dataParams }) => {
   const inventoryEntries = Object.entries(dataParams);

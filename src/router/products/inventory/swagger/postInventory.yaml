@@ -7,17 +7,6 @@ components:
           type: number
         size:
           type: string
-        frontImage:
-          type: string
-          format: binary
-        backImage:
-          type: string
-          format: binary
-      required:
-        -  quantity
-        -  size
-        -  frontImage
-        -  backImage
     postInventoryResponse:
       type: object
       properties:
@@ -51,7 +40,7 @@ paths:
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          application/json:
             schema:
               $ref: '#/components/schemas/postInventoryRequest'
       responses:

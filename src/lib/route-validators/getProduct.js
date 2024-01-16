@@ -10,7 +10,6 @@ const {
 const sortByFields = [
   'name',
   'price',
-  'description',
 ];
 
 const schemaGetProducts = {

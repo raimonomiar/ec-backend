@@ -6,8 +6,6 @@ module.exports = {
     quantity: { name: 'quantity', colName: 'quantity' },
     size: { name: 'size', colName: 'size' },
     sku: { name: 'sku', colName: 'sku' },
-    frontImage: { name: 'frontImage', colName: 'front_image' },
-    backImage: { name: 'backImage', colName: 'back_image' },
     createdAt: { name: 'createdAt', colName: 'created_at' },
     updatedAt: { name: 'updatedAt', colName: 'updated_at' },
   },

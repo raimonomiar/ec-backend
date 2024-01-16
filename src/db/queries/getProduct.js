@@ -10,19 +10,17 @@ const categoryIdClause = (categoryId) => (categoryId ? `AND ${products.cols.cate
 const selectProductsWIthPagination = (name, categoryId) => `
   SELECT
     P.total,
-    BIN_TO_UUID(PO.${products.cols.productId.colName}) as ${products.cols.productId.name},
+    BIN_TO_UUID(${products.cols.productId.colName}) as ${products.cols.productId.name},
     ${products.cols.name.colName} as ${products.cols.name.name},
     ${products.cols.description.colName} as ${products.cols.description.name},
     ${products.cols.price.colName} as ${products.cols.price.name},
-    ${products.cols.color.colName} as ${products.cols.color.name},
-    ${inventories.cols.frontImage.colName} as ${inventories.cols.frontImage.name},
-    ${inventories.cols.backImage.colName} as ${inventories.cols.backImage.name}
-  FROM ${products.table} as PO
-  LEFT JOIN ${inventories.table} as I
-  ON PO.${products.cols.productId.colName} = I.${inventories.cols.productId.colName},
+    ${products.cols.frontImage.colName} as ${products.cols.frontImage.name},
+    ${products.cols.backImage.colName} as ${products.cols.backImage.name},
+    ${products.cols.color.colName} as ${products.cols.color.name}
+  FROM ${products.table},
     (SELECT COUNT(${products.cols.productId.colName}) as total 
     FROM ${products.table} WHERE ${products.cols.createdBy.colName} IS NOT NULL) as P
-  WHERE PO.${products.cols.createdBy.colName} IS NOT NULL
+  WHERE ${products.table}.${products.cols.createdBy.colName} IS NOT NULL
   ${nameClause(name)}
   ${categoryIdClause(categoryId)}`;
 
@@ -32,13 +30,13 @@ const selectProductWithInventory = `
     ${products.cols.name.colName} as ${products.cols.name.name},
     ${products.cols.description.colName} as ${products.cols.description.name},
     ${products.cols.price.colName} as ${products.cols.price.name},
+    ${products.cols.frontImage.colName} as ${products.cols.frontImage.name},
+    ${products.cols.backImage.colName} as ${products.cols.backImage.name},
     ${products.cols.color.colName} as ${products.cols.color.name},
     BIN_TO_UUID(${inventories.cols.inventoryId.colName}) as ${inventories.cols.inventoryId.name},
     ${inventories.cols.quantity.colName} as ${inventories.cols.quantity.name},
     ${inventories.cols.size.colName} as ${inventories.cols.size.name},
-    ${inventories.cols.sku.colName} as ${inventories.cols.sku.name},
-    ${inventories.cols.frontImage.colName} as ${inventories.cols.frontImage.name},
-    ${inventories.cols.backImage.colName} as ${inventories.cols.backImage.name}
+    ${inventories.cols.sku.colName} as ${inventories.cols.sku.name}
   FROM ${products.table}
   LEFT JOIN ${inventories.table}
   ON ${products.table}.${products.cols.productId.colName} = ${inventories.table}.${inventories.cols.productId.colName}
