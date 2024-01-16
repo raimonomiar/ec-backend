@@ -41,7 +41,9 @@ function filterAndMapProductsAndInventory(rows) {
       price: _.head(group).price,
       inventories: _.head(group).inventoryId === null
         ? [] : _.map(group, (item) => _.pick(item, MAP_INVENTORY_COLS)),
-    }));
+    }))
+    .head()
+    .value();
 }
 
 module.exports = {
