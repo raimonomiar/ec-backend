@@ -4,10 +4,12 @@ const insertIntoProducts = `INSERT INTO ${products.table}(
   ${products.cols.name.colName},
   ${products.cols.description.colName},
   ${products.cols.price.colName},
-  ${products.cols.color.colName},
   ${products.cols.categoryId.colName},
+  ${products.cols.frontImage.colName},
+  ${products.cols.backImage.colName},
+  ${products.cols.color.colName},
   ${products.cols.createdBy.colName}
-  ) VALUES (?, ?, ?, ?, UUID_TO_BIN(?), UUID_TO_BIN(?))`;
+  ) VALUES (?, ?, ?, UUID_TO_BIN(?), ?, ?, ?, UUID_TO_BIN(?))`;
 
 const getQueryParamsForProducts = (
   input,
@@ -16,12 +18,14 @@ const getQueryParamsForProducts = (
     name,
     description,
     price,
-    color,
     categoryId,
+    frontImage,
+    backImage,
+    color,
     createdBy,
   } = input;
   const queryArgs = [
-    name, description, price, color, categoryId, createdBy,
+    name, description, price, categoryId, frontImage, backImage, color, createdBy,
   ];
   return {
     insertIntoProductsCmd: insertIntoProducts,

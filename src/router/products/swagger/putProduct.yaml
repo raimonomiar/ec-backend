@@ -1,34 +1,3 @@
-components:
-  schemas:
-    updateProductRequest:
-      type: object
-      properties:
-        categoryId:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        price:
-          type: number
-        color:
-          type: string
-    updateProductResponse:
-      type: object
-      properties:
-        message:
-          type: string
-    errorSchema:
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
 paths:
   /products/{productId}:
     put:
@@ -52,10 +21,6 @@ paths:
       responses:
         '204':
           description: Product updated successfully!
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/updateProductResponse'
         '500':
           description: Internal Server Error
           content:

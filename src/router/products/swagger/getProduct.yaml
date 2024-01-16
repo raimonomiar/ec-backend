@@ -16,9 +16,9 @@ components:
                 type: string
               price:
                 type: number
-              color:
+              frontImage:
                 type: string
-              categoryId:
+              backImage:
                 type: string
     getProductWithInventoriesResponse:
       type: object
@@ -31,10 +31,12 @@ components:
           type: string
         price:
           type: number
-        color:
+        frontImage:
           type: string
-          inventories:
-            type: array
+        backImage:
+          type: string
+        inventories:
+          type: array
           items:
             type: object
             properties:
@@ -42,12 +44,10 @@ components:
                 type: integer
               size:
                 type: string
+              color:
+                type: string
               quantity:
                 type: integer
-              frontImage:
-                type: string
-              backImage:
-                type: string
 paths:
   /products:
     get:
