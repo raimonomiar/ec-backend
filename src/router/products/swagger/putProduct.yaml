@@ -11,6 +11,8 @@ components:
           type: string
         price:
           type: number
+        color:
+          type: string
     updateProductResponse:
       type: object
       properties:

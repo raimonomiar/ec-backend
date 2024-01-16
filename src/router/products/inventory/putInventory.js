@@ -17,7 +17,6 @@ const responseGenerator = async (req, res, next) => {
     const {
       quantity,
       size,
-      color,
     } = req.body;
     const frontImage = pathOr('', ['frontImage', 0, 'filename'], req.files);
     const backImage = pathOr('', ['backImage', 0, 'filename'], req.files);
@@ -28,7 +27,6 @@ const responseGenerator = async (req, res, next) => {
         size,
         frontImage,
         backImage,
-        color,
       },
     });
     res.status(HttpStatusCode.NO_CONTENT).send();

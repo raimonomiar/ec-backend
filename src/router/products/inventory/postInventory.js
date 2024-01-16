@@ -16,7 +16,6 @@ const responseGenerator = async (req, res, next) => {
     const {
       quantity,
       size,
-      color,
     } = req.body;
     const { productId } = req.params;
     const frontImage = pathOr('', ['frontImage', 0, 'filename'], req.files);
@@ -27,7 +26,6 @@ const responseGenerator = async (req, res, next) => {
       size,
       frontImage,
       backImage,
-      color,
     });
     res.status(HttpStatusCode.CREATED).send();
   } catch (error) {

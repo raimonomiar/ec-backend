@@ -13,6 +13,7 @@ const schemaUpdateProduct = {
     name: joi.string().max(255),
     description: joi.string(),
     price: joi.number(),
+    color: joi.string().max(20),
   }).required(),
 };
 

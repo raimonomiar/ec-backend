@@ -16,6 +16,8 @@ components:
                 type: string
               price:
                 type: number
+              color:
+                type: string
               categoryId:
                 type: string
     getProductWithInventoriesResponse:
@@ -29,6 +31,8 @@ components:
           type: string
         price:
           type: number
+        color:
+          type: string
           inventories:
             type: array
           items:
@@ -37,8 +41,6 @@ components:
               inventoryId:
                 type: integer
               size:
-                type: string
-              color:
                 type: string
               quantity:
                 type: integer

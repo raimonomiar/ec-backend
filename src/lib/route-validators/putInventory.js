@@ -12,7 +12,6 @@ const schema = {
   body: joi.object({
     quantity: joi.number(),
     size: joi.string().max(10),
-    color: joi.string().max(20),
   }).required(),
 };
 

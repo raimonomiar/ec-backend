@@ -21,6 +21,7 @@ const addProduct = async (req, res, next) => {
       name,
       description,
       price,
+      color,
       categoryId,
     } = req.body;
 
@@ -28,6 +29,7 @@ const addProduct = async (req, res, next) => {
       name,
       description,
       price,
+      color,
       categoryId,
       createdBy: clsSession.get(CLS_KEY_USER).userId,
     });
