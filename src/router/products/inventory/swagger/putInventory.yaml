@@ -13,8 +13,6 @@ components:
         backImage:
           type: string
           format: binary
-        color:
-          type: string
     putInventoryResponse:
       type: object
       properties:

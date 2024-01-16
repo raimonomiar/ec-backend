@@ -13,14 +13,11 @@ components:
         backImage:
           type: string
           format: binary
-        color:
-          type: string
       required:
         -  quantity
         -  size
         -  frontImage
         -  backImage
-        -  color
     postInventoryResponse:
       type: object
       properties:

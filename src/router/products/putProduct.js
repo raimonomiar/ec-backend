@@ -13,6 +13,7 @@ const responseGenerator = async (req, res, next) => {
       name,
       description,
       price,
+      color,
       categoryId,
     } = req.body;
 
@@ -22,6 +23,7 @@ const responseGenerator = async (req, res, next) => {
         name,
         description,
         price,
+        color,
         categoryId,
       },
     });
