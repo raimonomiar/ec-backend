@@ -12,6 +12,7 @@ const accessValidator = require('./accessValidator');
 const postInventory = require('./postInventory');
 const putInventory = require('./putInventory');
 const deleteInventory = require('./deleteInventory');
+const postCart = require('./postCart');
 
 module.exports = {
   postUser,
@@ -28,4 +29,5 @@ module.exports = {
   postInventory,
   putInventory,
   deleteInventory,
+  postCart,
 };

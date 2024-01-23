@@ -1,4 +1,4 @@
-const { pickBy } = require('ramda');
+const { pickBy, path } = require('ramda');
 const queryExecutor = require('../queryExecutor');
 const {
   productHelper,
@@ -39,7 +39,10 @@ async function getProducts(queryParams = {}) {
   const rows = await queryExecutor.getProducts({
     name, categoryId, sortBy, sortOrder, limit, offset,
   });
-  const products = productHelper.filterAndMapProducts(rows, ['total']);
+  const total = await queryExecutor.getProductsCount({
+    name, categoryId,
+  });
+  const products = productHelper.filterAndMapProducts(rows, path([0, 'total'], total));
   return products;
 }
 

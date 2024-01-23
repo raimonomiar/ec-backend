@@ -3,6 +3,8 @@ const tokens = require('./tokens');
 const products = require('./products');
 const inventories = require('./inventories');
 const category = require('./category');
+const session = require('./shoppingSession');
+const cart = require('./cartItem');
 
 module.exports = {
   users,
@@ -10,4 +12,6 @@ module.exports = {
   products,
   inventories,
   category,
+  session,
+  cart,
 };

@@ -1,15 +1,11 @@
 const _ = require('lodash');
-const {
-  map,
-  omit,
-} = require('ramda');
 
 const MAP_INVENTORY_COLS = ['inventoryId', 'quantity', 'size', 'sku'];
 
-function filterAndMapProducts(rows, keyToFilter) {
+function filterAndMapProducts(rows, total) {
   return {
-    data: map(omit(keyToFilter), rows),
-    total: rows[0] && rows[0].total,
+    data: rows,
+    total,
   };
 }
 
@@ -25,6 +21,7 @@ function filterAndMapProductsAndInventory(rows) {
       frontImage: _.head(group).frontImage,
       backImage: _.head(group).backImage,
       color: _.head(group).color,
+      categoryId: _.head(group).categoryId,
       inventories: _.map(group, (item) => _.pick(item, MAP_INVENTORY_COLS)),
     }))
     .head()
