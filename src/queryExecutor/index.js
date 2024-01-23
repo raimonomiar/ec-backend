@@ -17,6 +17,12 @@ const {
   addInventory,
   updateInventory,
   deleteInventory,
+  addCart,
+  updateCart,
+  getCart,
+  getSession,
+  addSession,
+  updateSession,
 } = queries;
 
 const insertIntoUsersTable = async (queryParams) => {
@@ -107,6 +113,14 @@ const getProducts = (queryParams) => {
   return mysql.pool.query(selectProductsWIthPaginationCmd, selectProductsWIthPaginationArgs);
 };
 
+const getProductsCount = (queryParams) => {
+  const {
+    selectProductsCountCmd,
+    selectProductsCountArgs,
+  } = getProduct.getQueryParamsForProductsTotal(queryParams);
+  return mysql.pool.query(selectProductsCountCmd, selectProductsCountArgs);
+};
+
 const getProductWithInventory = (queryParams) => {
   const {
     selectProductWithInventoryCmd,
@@ -152,6 +166,54 @@ const deleteInventoryTable = async (queryParams) => {
   return mysql.pool.query(deleteInventoryCmd, deleteInventoryArgs);
 };
 
+const getCartSession = (queryParams) => {
+  const {
+    selectSessionCmd,
+    selectSessionArgs,
+  } = getSession.getQueryParamsForSession(queryParams);
+  return mysql.pool.query(selectSessionCmd, selectSessionArgs);
+};
+
+const insertCartSession = (queryParams) => {
+  const {
+    insertSessionCmd,
+    insertSessionArgs,
+  } = addSession.getQueryParamsForAddSession(queryParams);
+  return mysql.pool.query(insertSessionCmd, insertSessionArgs);
+};
+
+const updateCartSession = (queryParams) => {
+  const {
+    updateSessionCmd,
+    updateSessionArgs,
+  } = updateSession.getQueryParamsForUpdateSession(queryParams);
+  return mysql.pool.query(updateSessionCmd, updateSessionArgs);
+};
+
+const getCartItem = (queryParams) => {
+  const {
+    selectCartItemCmd,
+    selectCartItemArgs,
+  } = getCart.getQueryParamsForCart(queryParams);
+  return mysql.pool.query(selectCartItemCmd, selectCartItemArgs);
+};
+
+const addCartItem = (queryParams) => {
+  const {
+    insertIntoCartCmd,
+    insertIntoCartArgs,
+  } = addCart.getQueryParamsForAddCart(queryParams);
+  return mysql.pool.query(insertIntoCartCmd, insertIntoCartArgs);
+};
+
+const updateCartQuantity = (queryParams) => {
+  const {
+    updateCartQuantityCmd,
+    updateInventoryArgs,
+  } = updateCart.getQueryParamsForUpdateQuantity(queryParams);
+  return mysql.pool.query(updateCartQuantityCmd, updateInventoryArgs);
+};
+
 module.exports = {
   insertIntoUsersTable,
   getUserByEmail,
@@ -160,6 +222,7 @@ module.exports = {
   getResetPasswordToken,
   insertIntoProductsTable,
   getProducts,
+  getProductsCount,
   insertIntoCategoryTable,
   updateCategoryInTable,
   deleteCategoryFromTable,
@@ -171,4 +234,10 @@ module.exports = {
   insertIntoInventoryTable,
   updateInventoryTable,
   deleteInventoryTable,
+  getCartSession,
+  insertCartSession,
+  updateCartSession,
+  getCartItem,
+  addCartItem,
+  updateCartQuantity,
 };

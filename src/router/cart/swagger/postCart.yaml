@@ -1,37 +1,17 @@
 components:
   schemas:
-    addProductRequest:
+    addCartRequest:
       type: object
       properties:
-        categoryId:
+        productId:
           type: string
-        name:
-          type: string
-        description:
-          type: string
-        price:
+        quantity:
           type: number
-        frontImage:
-          type: string
-          format: binary
-        backImage:
-          type: string
-          format: binary
-        color:
-          type: string
       required:
-        - categoryId
-        - name
-        - description
-        - price
-        - frontImage
-        - backImage
-    addProductResponse:
+        - productId
+        - quantity
+    addCartResponse:
       type: object
-      properties:
-        message:
-          type: string
-    errorSchema:
       properties:
         message:
           type: string
@@ -43,25 +23,25 @@ components:
       scheme: bearer
       bearerFormat: JWT
 paths:
-  /products:
+  /cart:
     post:
       tags:
-       - products
-      summary: Add Product
-      description: Add Product to the system
+       - cart
+      summary: Add Cart
+      description: Add product to the cart
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              $ref: '#/components/schemas/addProductRequest'
+              $ref: '#/components/schemas/addCartRequest'
       responses:
         '201':
           description: Request processed successfully!
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/addProductResponse'
+                $ref: '#/components/schemas/addCartResponse'
         '500':
           description: Internal Server Error
           content:

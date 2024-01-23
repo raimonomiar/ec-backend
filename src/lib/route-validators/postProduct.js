@@ -10,7 +10,7 @@ const schema = {
     name: joi.string().max(255).required(),
     description: joi.string().required(),
     price: joi.number().required(),
-    color: joi.string().max(20).required(),
+    color: joi.string().max(20),
   }).required(),
 };
 

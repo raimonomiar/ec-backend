@@ -42,6 +42,7 @@ module.exports = {
     passwordRegex: '^(?=.*[A-Z])(?=.*\\d).+$',
     tokenLength: 32,
     tokenExpirationTime: 86400,
+    cartSessionExpirationTime: 604800,
     ER_DUP_ENTRY: 'ER_DUP_ENTRY',
     TOKEN_TYPE: {
       AUTH: 'auth',

@@ -14,6 +14,12 @@ const deleteProduct = require('./deleteProduct');
 const addInventory = require('./addInventory');
 const updateInventory = require('./updateInventory');
 const deleteInventory = require('./deleteInventory');
+const getSession = require('./getSession');
+const addSession = require('./addSession');
+const updateSession = require('./updateSession');
+const getCart = require('./getCart');
+const addCart = require('./addCart');
+const updateCart = require('./updateCart');
 
 module.exports = {
   addUser,
@@ -32,4 +38,10 @@ module.exports = {
   addInventory,
   updateInventory,
   deleteInventory,
+  getSession,
+  addSession,
+  updateSession,
+  getCart,
+  addCart,
+  updateCart,
 };

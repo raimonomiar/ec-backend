@@ -3,6 +3,8 @@ const tokenService = require('./tokens');
 const productService = require('./products');
 const categoryService = require('./categorys');
 const inventoryService = require('./inventories');
+const sessionService = require('./sessionService');
+const cartService = require('./cartService');
 
 module.exports = {
   userService,
@@ -10,4 +12,6 @@ module.exports = {
   productService,
   categoryService,
   inventoryService,
+  sessionService,
+  cartService,
 };

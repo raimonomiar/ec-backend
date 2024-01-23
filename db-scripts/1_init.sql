@@ -64,21 +64,28 @@ CREATE TABLE IF NOT EXISTS category (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS cart (
-  cart_id BINARY(16) PRIMARY KEY DEFAULT (UUID_TO_BIN(UUID())),
-  session_id VARCHAR(100),
-  user_id BINARY(16),
-  product_id BINARY(16) NOT NULL,
-  discount DECIMAL(10, 2),
-  quantity INT NOT NULL,
-  status VARCHAR(20) NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (product_id) REFERENCES products(product_id)
+CREATE TABLE IF NOT EXISTS cart_item (
+    cart_id BINARY(16) PRIMARY KEY DEFAULT (UUID_TO_BIN(UUID())),
+    session_id BINARY(16),
+    product_id BINARY(16),
+    quantity INT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_by BINARY(16),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    updated_by BINARY(16),
+    FOREIGN KEY (session_id) REFERENCES shopping_session(session_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
-
-
+CREATE TABLE IF NOT EXISTS shopping_session (
+   session_id  BINARY(16) PRIMARY KEY DEFAULT uuid_to_bin(uuid()) NOT NULL,
+   user_id     BINARY(16),
+   total       DECIMAL(10)   DEFAULT 0 NOT NULL,
+   created_at  TIMESTAMP     DEFAULT CURRENT_TIMESTAMP NOT NULL,
+   created_by  BINARY(16),
+   updated_at  TIMESTAMP     DEFAULT CURRENT_TIMESTAMP,
+   updated_by  BINARY(16),
+   FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
 
 
