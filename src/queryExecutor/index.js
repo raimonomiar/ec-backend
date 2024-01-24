@@ -20,6 +20,7 @@ const {
   addCart,
   updateCart,
   getCart,
+  deleteCart,
   getSession,
   addSession,
   updateSession,
@@ -166,11 +167,19 @@ const deleteInventoryTable = async (queryParams) => {
   return mysql.pool.query(deleteInventoryCmd, deleteInventoryArgs);
 };
 
-const getCartSession = (queryParams) => {
+const getCartSession = (queryparams) => {
   const {
     selectSessionCmd,
     selectSessionArgs,
-  } = getSession.getQueryParamsForSession(queryParams);
+  } = getSession.getQueryParamsForSession(queryparams);
+  return mysql.pool.query(selectSessionCmd, selectSessionArgs);
+};
+
+const getCartSessionByUser = (queryParams) => {
+  const {
+    selectSessionCmd,
+    selectSessionArgs,
+  } = getSession.getQueryParamsForSessionByUser(queryParams);
   return mysql.pool.query(selectSessionCmd, selectSessionArgs);
 };
 
@@ -198,6 +207,14 @@ const getCartItem = (queryParams) => {
   return mysql.pool.query(selectCartItemCmd, selectCartItemArgs);
 };
 
+const getCartItems = (queryParams) => {
+  const {
+    selectCartItemsCmd,
+    selectCartItemsArgs,
+  } = getCart.getQueryParamsForCarts(queryParams);
+  return mysql.pool.query(selectCartItemsCmd, selectCartItemsArgs);
+};
+
 const addCartItem = (queryParams) => {
   const {
     insertIntoCartCmd,
@@ -212,6 +229,22 @@ const updateCartQuantity = (queryParams) => {
     updateInventoryArgs,
   } = updateCart.getQueryParamsForUpdateQuantity(queryParams);
   return mysql.pool.query(updateCartQuantityCmd, updateInventoryArgs);
+};
+
+const updateCartItem = (queryParams) => {
+  const {
+    updateCartCmd,
+    updateCartArgs,
+  } = updateCart.getQueryParamsForUpdateCart(queryParams);
+  return mysql.pool.query(updateCartCmd, updateCartArgs);
+};
+
+const deleteCartItem = (queryParams) => {
+  const {
+    deleteCartCmd,
+    deleteCartArgs,
+  } = deleteCart.getQueryParamsForDeleteCart(queryParams);
+  return mysql.pool.query(deleteCartCmd, deleteCartArgs);
 };
 
 module.exports = {
@@ -234,10 +267,14 @@ module.exports = {
   insertIntoInventoryTable,
   updateInventoryTable,
   deleteInventoryTable,
+  getCartSessionByUser,
   getCartSession,
   insertCartSession,
   updateCartSession,
   getCartItem,
+  getCartItems,
   addCartItem,
+  deleteCartItem,
   updateCartQuantity,
+  updateCartItem,
 };

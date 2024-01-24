@@ -14,7 +14,16 @@ const selectSessionByUserId = `
   ${constructLimitClause}
 `;
 
-const getQueryParamsForSession = ({
+const selectSession = `
+  SELECT
+  BIN_TO_UUID(${session.cols.sessionId.colName}) as ${session.cols.sessionId.name},
+  BIN_TO_UUID(${session.cols.userId.colName}) as ${session.cols.userId.name},
+  ${session.cols.total.colName} as ${session.cols.total.name}
+  FROM ${session.table}
+  WHERE BIN_TO_UUID(${session.cols.sessionId.colName}) = ?
+`;
+
+const getQueryParamsForSessionByUser = ({
   userId,
   cartSessionExpirationTime,
 }) => {
@@ -27,6 +36,17 @@ const getQueryParamsForSession = ({
   };
 };
 
+const getQueryParamsForSession = ({
+  sessionId,
+}) => {
+  const queryArgs = [sessionId];
+  return {
+    selectSessionCmd: selectSession,
+    selectSessionArgs: queryArgs,
+  };
+};
+
 module.exports = {
+  getQueryParamsForSessionByUser,
   getQueryParamsForSession,
 };

@@ -6,6 +6,15 @@ const updateCartQuantity = `
   WHERE BIN_TO_UUID(${cart.cols.cartId.colName}) = ?
 `;
 
+const updateCartAndSelectSessionId = `
+  UPDATE ${cart.table}
+  SET ${cart.cols.quantity.colName} = ?
+  WHERE BIN_TO_UUID(${cart.cols.cartId.colName}) = ?;
+  SELECT BIN_TO_UUID(${cart.cols.sessionId.colName}) as ${cart.cols.sessionId.name}
+  FROM ${cart.table}
+  WHERE BIN_TO_UUID(${cart.cols.cartId.colName}) = ?;
+`;
+
 const getQueryParamsForUpdateQuantity = ({
   cartId, quantity,
 }) => {
@@ -16,6 +25,17 @@ const getQueryParamsForUpdateQuantity = ({
   };
 };
 
+const getQueryParamsForUpdateCart = ({
+  cartId, quantity,
+}) => {
+  const queryArgs = [quantity, cartId, cartId];
+  return {
+    updateCartCmd: updateCartAndSelectSessionId,
+    updateCartArgs: queryArgs,
+  };
+};
+
 module.exports = {
   getQueryParamsForUpdateQuantity,
+  getQueryParamsForUpdateCart,
 };

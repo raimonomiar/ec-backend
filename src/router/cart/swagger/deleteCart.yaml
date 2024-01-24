@@ -1,0 +1,49 @@
+components:
+  schemas:
+    deleteCartRequest:
+      type: object
+      properties:
+        quantity:
+          type: number
+      required:
+        - quantity
+    deleteCartResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /cart/{cartId}:
+    delete:
+      tags:
+       - cart
+      summary: Delete Cart
+      description: Delete cart item
+      parameters:
+        - in: path
+          name: cartId
+          schema:
+            type: string
+          description: cart id
+      responses:
+        '204':
+          description: Request processed successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteCartResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+      security:
+        - bearerAuth: []

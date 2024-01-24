@@ -35,6 +35,48 @@ async function addCart(input) {
   });
 }
 
+async function getCarts(input) {
+  const { sessionId } = input;
+  const cartItems = await queryExecutor.getCartItems({ sessionId });
+  const cartSession = await queryExecutor.getCartSession({ sessionId });
+
+  return {
+    data: cartItems,
+    total: path(['0', 'total'], cartSession),
+  };
+}
+
+async function updateCart(input) {
+  const {
+    cartId,
+    quantity,
+  } = input;
+
+  const session = await queryExecutor.updateCartItem({
+    cartId,
+    quantity,
+  });
+
+  return queryExecutor.updateCartSession({
+    sessionId: path(['1', '0', 'sessionId'], session),
+  });
+}
+
+async function deleteCart(input) {
+  const {
+    cartId,
+  } = input;
+  const session = await queryExecutor.deleteCartItem({
+    cartId,
+  });
+  return queryExecutor.updateCartSession({
+    sessionId: path(['0', '0', 'sessionId'], session),
+  });
+}
+
 module.exports = {
   addCart,
+  getCarts,
+  updateCart,
+  deleteCart,
 };

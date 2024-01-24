@@ -1,0 +1,48 @@
+components:
+  schemas:
+    getCartResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              price:
+                type: number
+              frontImage:
+                type: string
+              quantity:
+                type: number
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths:
+  /cart:
+    get:
+      tags:
+        - cart
+      summary: Get all cart items
+      description: Returns all cart items with total count
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCartResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+      security:
+        - bearerAuth: []

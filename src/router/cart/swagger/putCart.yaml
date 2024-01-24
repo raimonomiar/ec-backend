@@ -1,0 +1,55 @@
+components:
+  schemas:
+    updateCartRequest:
+      type: object
+      properties:
+        quantity:
+          type: number
+      required:
+        - quantity
+    updateCartResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /cart/{cartId}:
+    put:
+      tags:
+       - cart
+      summary: Update Cart
+      description: Update cart item
+      parameters:
+        - in: path
+          name: cartId
+          schema:
+            type: string
+          description: cart id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateCartRequest'
+      responses:
+        '204':
+          description: Request processed successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateCartResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+      security:
+        - bearerAuth: []

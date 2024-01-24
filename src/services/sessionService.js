@@ -22,7 +22,10 @@ function addNewSession(userId) {
 }
 
 async function getSessionId(userId) {
-  const session = await getCartSession(userId);
+  const session = await queryExecutor.getCartSessionByUser({
+    userId,
+    cartSessionExpirationTime,
+  });
   if (isEmpty(session)) {
     await addNewSession(userId);
     return getCartSession(userId);

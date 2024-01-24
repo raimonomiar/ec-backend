@@ -20,6 +20,7 @@ const updateSession = require('./updateSession');
 const getCart = require('./getCart');
 const addCart = require('./addCart');
 const updateCart = require('./updateCart');
+const deleteCart = require('./deleteCart');
 
 module.exports = {
   addUser,
@@ -44,4 +45,5 @@ module.exports = {
   getCart,
   addCart,
   updateCart,
+  deleteCart,
 };

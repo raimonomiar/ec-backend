@@ -13,6 +13,9 @@ const postInventory = require('./postInventory');
 const putInventory = require('./putInventory');
 const deleteInventory = require('./deleteInventory');
 const postCart = require('./postCart');
+const getCart = require('./getCart');
+const putCart = require('./putCart');
+const deleteCart = require('./deleteCart');
 
 module.exports = {
   postUser,
@@ -30,4 +33,7 @@ module.exports = {
   putInventory,
   deleteInventory,
   postCart,
+  getCart,
+  putCart,
+  deleteCart,
 };
