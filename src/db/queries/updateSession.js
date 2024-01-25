@@ -5,11 +5,11 @@ const updateSession = `
   SET ${session.cols.total.colName} =
     (
       SELECT 
-        SUM(
+        IFNULL(SUM(
              ${cart.table}.${cart.cols.quantity.colName}
              *
              ${products.table}.${products.cols.price.colName}
-        )
+        ), 0)
       FROM ${cart.table}
       INNER JOIN ${products.table}
       ON ${products.table}.${products.cols.productId.colName}

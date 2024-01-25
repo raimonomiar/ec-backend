@@ -68,13 +68,15 @@ CREATE TABLE IF NOT EXISTS cart_item (
     cart_id BINARY(16) PRIMARY KEY DEFAULT (UUID_TO_BIN(UUID())),
     session_id BINARY(16),
     product_id BINARY(16),
+    inventory_id BINARY(16),
     quantity INT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_by BINARY(16),
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     updated_by BINARY(16),
     FOREIGN KEY (session_id) REFERENCES shopping_session(session_id),
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
+    FOREIGN KEY (product_id) REFERENCES products(product_id),
+    FOREIGN KEY (inventory_id) REFERENCES inventories(inventory_id)
 );
 
 CREATE TABLE IF NOT EXISTS shopping_session (
