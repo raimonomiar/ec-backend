@@ -7,9 +7,12 @@ components:
           type: string
         quantity:
           type: number
+        inventoryId:
+          type: string
       required:
         - productId
         - quantity
+        - inventoryId
     addCartResponse:
       type: object
       properties:

@@ -4,6 +4,7 @@ module.exports = {
     cartId: { name: 'cartId', colName: 'cart_id' },
     sessionId: { name: 'sessionId', colName: 'session_id' },
     productId: { name: 'productId', colName: 'product_id' },
+    inventoryId: { name: 'inventoryId', colName: 'inventory_id' },
     quantity: { name: 'quantity', colName: 'quantity' },
     createdBy: { name: 'createdBy', colName: 'created_by' },
     createdAt: { name: 'createdAt', colName: 'created_at' },

@@ -1,10 +1,11 @@
 const { isEmpty, path } = require('ramda');
 const queryExecutor = require('../queryExecutor');
 
-function getCart(productId, sessionId) {
+function getCart(productId, sessionId, inventoryId) {
   return queryExecutor.getCartItem({
     productId,
     sessionId,
+    inventoryId,
   });
 }
 
@@ -13,9 +14,10 @@ async function addCart(input) {
     sessionId,
     userId,
     productId,
+    inventoryId,
     quantity,
   } = input;
-  const cartItem = await getCart(productId, sessionId);
+  const cartItem = await getCart(productId, sessionId, inventoryId);
   if (!isEmpty(cartItem)) {
     const cartId = path(['0', 'cartId'], cartItem);
     await queryExecutor.updateCartQuantity({
@@ -27,6 +29,7 @@ async function addCart(input) {
       sessionId,
       userId,
       productId,
+      inventoryId,
       quantity,
     });
   }

@@ -7,6 +7,7 @@ const schema = {
   }),
   body: joi.object({
     productId: joi.string().guid().required(),
+    inventoryId: joi.string().guid().required(),
     quantity: joi.number().required(),
   }).required(),
 };

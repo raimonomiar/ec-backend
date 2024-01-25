@@ -23,12 +23,14 @@ const addCart = async (req, res, next) => {
     const {
       quantity,
       productId,
+      inventoryId,
     } = req.body;
     const { userId } = clsSession.get(CLS_KEY_USER);
     const sessionId = await sessionService.getSessionId(userId);
     await cartService.addCart({
       sessionId,
       productId,
+      inventoryId,
       quantity,
       userId,
     });
