@@ -18,6 +18,22 @@ const updatePassword = async (req, res, next) => {
   }
 };
 
+const updateUser = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const {
+      firstName,
+      lastName,
+      street,
+      zip,
+      phone,
+      city,
+      appartment,
+    } = req.body;
+  } catch(error) {
+  }
+};
+
 module.exports = [
   {
     route: '/:userId/password',
