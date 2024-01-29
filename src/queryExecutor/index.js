@@ -86,6 +86,13 @@ const updatePassword = (queryParams) => {
   mysql.pool.query(updatePasswordCmd, updatePasswordArgs);
 };
 
+const updateUserTable = (queryParams) => {
+  const {
+    updateUserCmd,
+    updateUserArgs,
+  } = updateUser.getQueryParamsForUpdateUser(queryParams);
+  return mysql.pool.query(updateUserCmd, updateUserArgs);
+};
 const insertIntoTokensTable = (queryParams) => {
   const {
     insertIntoTokensCmd, insertIntoTokensArgs,
@@ -250,6 +257,7 @@ const deleteCartItem = (queryParams) => {
 module.exports = {
   insertIntoUsersTable,
   getUserByEmail,
+  updateUserTable,
   updatePassword,
   insertIntoTokensTable,
   getResetPasswordToken,

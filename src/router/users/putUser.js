@@ -4,6 +4,7 @@ const {
   putUser: {
     schemaUpdatePassword,
     validateResetToken,
+    schemaUpdateUser,
   },
 } = require('../../lib/route-validators');
 
@@ -30,7 +31,22 @@ const updateUser = async (req, res, next) => {
       city,
       appartment,
     } = req.body;
-  } catch(error) {
+    await userService.updateUser({
+      userId,
+      dataParams: {
+        firstName,
+        lastName,
+        street,
+        zip,
+        phone,
+        city,
+        appartment,
+      },
+    });
+
+    res.status(HttpStatusCode.NO_CONTENT).send();
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -42,6 +58,14 @@ module.exports = [
       schemaUpdatePassword,
       validateResetToken,
       updatePassword,
+    ],
+  },
+  {
+    route: '/:userId',
+    method: 'put',
+    middlewares: [
+      schemaUpdateUser,
+      updateUser,
     ],
   },
 ];
