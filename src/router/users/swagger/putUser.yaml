@@ -10,12 +10,34 @@ components:
       properties:
         message:
           type: string
+    updateUserRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        street:
+          type: string
+        zip:
+          type: string
+        phone:
+          type: string
+        city:
+          type: string
+        appartment:
+          type: string
     errorSchema:
       properties:
         message:
           type: string
         code:
           type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 paths:
   /users/{userId}/password:
     put:
@@ -55,3 +77,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/errorSchema'
+  /users/{userId}:
+    put:
+      tags:
+        - users
+      summary: Update User
+      description: Update User to the system
+      parameters:
+        - name: userId
+          in: path
+          description: User Id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateUserRequest'
+      responses:
+        '204':
+          description: Request processed successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updatePasswordResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
+      security:
+        - bearerAuth: []

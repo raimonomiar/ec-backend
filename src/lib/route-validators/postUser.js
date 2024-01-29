@@ -15,7 +15,6 @@ const schema = {
     street: joi.string().max(100),
     zip: joi.string().max(20),
     phone: joi.string().max(20),
-    isAdmin: joi.boolean(),
     city: joi.string().max(50),
     appartment: joi.string().max(50),
   }).required(),

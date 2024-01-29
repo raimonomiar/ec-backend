@@ -28,6 +28,24 @@ const schemaUpdatePassword = {
   }).required(),
 };
 
+const schemaUpdateUser = {
+  headers: joi.object({
+    authorization: joi.string().regex(/Bearer\s[A-Za-z0-9\-._~+/]+=*/).required(),
+  }),
+  params: joi.object({
+    userId: joi.string().guid().required(),
+  }).required(),
+  body: joi.object({
+    firstName: joi.string().max(50),
+    lastName: joi.string().max(50),
+    street: joi.string().max(100),
+    zip: joi.string().max(20),
+    phone: joi.string().max(20),
+    city: joi.string().max(50),
+    appartment: joi.string().max(50),
+  }).required(),
+};
+
 const validateResetToken = async (req, res, next) => {
   const { headers } = req;
   if (!await tokenService.validateResetToken(headers)) {
@@ -44,4 +62,5 @@ const validateResetToken = async (req, res, next) => {
 module.exports = {
   schemaUpdatePassword: validate(schemaUpdatePassword),
   validateResetToken,
+  schemaUpdateUser: validate(schemaUpdateUser),
 };

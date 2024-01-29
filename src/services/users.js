@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const {
   saltRound,
 } = require('config').get('constants');
+const { pickBy } = require('ramda');
 const queryExecutor = require('../queryExecutor');
 
 async function addUser(input) {
@@ -69,9 +70,22 @@ async function validatePassword(input) {
   };
 }
 
+async function updateUser(input) {
+  const {
+    userId,
+  } = input;
+  let { dataParams } = input;
+  dataParams = pickBy((val) => val !== undefined, dataParams);
+  return queryExecutor.updateUserTable({
+    userId,
+    dataParams,
+  });
+}
+
 module.exports = {
   addUser,
   validatePassword,
   getUserByEmail,
   updatePassword,
+  updateUser,
 };
