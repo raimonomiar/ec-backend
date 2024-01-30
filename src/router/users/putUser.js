@@ -5,6 +5,7 @@ const {
     schemaUpdatePassword,
     validateResetToken,
     schemaUpdateUser,
+    schemaResetPassword,
   },
 } = require('../../lib/route-validators');
 
@@ -53,10 +54,18 @@ const updateUser = async (req, res, next) => {
 module.exports = [
   {
     route: '/:userId/password',
+    method: 'post',
+    middlewares: [
+      schemaResetPassword,
+      validateResetToken,
+      updatePassword,
+    ],
+  },
+  {
+    route: '/:userId/password',
     method: 'put',
     middlewares: [
       schemaUpdatePassword,
-      validateResetToken,
       updatePassword,
     ],
   },

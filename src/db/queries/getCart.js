@@ -21,6 +21,7 @@ const selectCartItems = `
   ${products.table}.${products.cols.frontImage.colName} as ${products.cols.frontImage.name},
   ${products.table}.${products.cols.price.colName} as ${products.cols.price.name},
   ${cart.table}.${cart.cols.quantity.colName} as ${cart.cols.quantity.name},
+  ${inventories.table}.${inventories.cols.size.colName} as ${inventories.cols.size.colName},
   ${inventories.table}.${inventories.cols.quantity.colName} as ${STOCK}
   FROM ${cart.table}
   INNER JOIN ${products.table} 

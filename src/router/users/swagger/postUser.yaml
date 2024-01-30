@@ -33,6 +33,16 @@ components:
       properties:
         message:
           type: string
+    updatePasswordRequest:
+      type: object
+      properties:
+        password:
+          type: string
+    updatePasswordResponse:
+      type: object
+      properties:
+        message:
+          type: string
     errorSchema:
       properties:
         message:
@@ -40,6 +50,44 @@ components:
         code:
           type: string
 paths:
+  /users/{userId}/password:
+    post:
+      tags:
+        - users
+      summary: Reset Password
+      description: Update Password to the system
+      parameters:
+        - name: token
+          in: header
+          description: token key
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          description: User Id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updatePasswordRequest'
+      responses:
+        '200':
+          description: Request processed successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updatePasswordResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorSchema'
   /users:
     post:
       tags:
