@@ -14,9 +14,23 @@ const {
   },
 } = require('../../../constants/errorMaps');
 
-const schemaUpdatePassword = {
+const schemaResetPassword = {
   headers: joi.object({
     token: joi.string().required(),
+  }),
+  params: joi.object({
+    userId: joi.string().guid().required(),
+  }).required(),
+  body: joi.object({
+    password: joi.string()
+      .min(minPasswordLength)
+      .required(),
+  }).required(),
+};
+
+const schemaUpdatePassword = {
+  headers: joi.object({
+    authorization: joi.string().regex(/Bearer\s[A-Za-z0-9\-._~+/]+=*/).required(),
   }),
   params: joi.object({
     userId: joi.string().guid().required(),
@@ -60,7 +74,8 @@ const validateResetToken = async (req, res, next) => {
 };
 
 module.exports = {
-  schemaUpdatePassword: validate(schemaUpdatePassword),
+  schemaResetPassword: validate(schemaResetPassword),
   validateResetToken,
   schemaUpdateUser: validate(schemaUpdateUser),
+  schemaUpdatePassword: validate(schemaUpdatePassword),
 };
