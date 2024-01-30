@@ -9,6 +9,11 @@ function getCart(productId, sessionId, inventoryId) {
   });
 }
 
+async function isWithinStockLimit(cartQuantity, quantity, inventoryId) {
+  const inventory = await queryExecutor.getInventoryFromTable({ inventoryId });
+  return cartQuantity + quantity <= path(['0', 'quantity'], inventory);
+}
+
 async function addCart(input) {
   const {
     sessionId,
@@ -19,11 +24,15 @@ async function addCart(input) {
   } = input;
   const cartItem = await getCart(productId, sessionId, inventoryId);
   if (!isEmpty(cartItem)) {
-    const cartId = path(['0', 'cartId'], cartItem);
-    await queryExecutor.updateCartQuantity({
-      cartId,
-      quantity,
-    });
+    if (await isWithinStockLimit(path(['0', 'quantity'], cartItem), quantity, inventoryId)) {
+      const cartId = path(['0', 'cartId'], cartItem);
+      await queryExecutor.updateCartQuantity({
+        cartId,
+        quantity,
+      });
+    } else {
+      return false;
+    }
   } else {
     await queryExecutor.addCartItem({
       sessionId,
@@ -33,9 +42,10 @@ async function addCart(input) {
       quantity,
     });
   }
-  return queryExecutor.updateCartSession({
+  await queryExecutor.updateCartSession({
     sessionId,
   });
+  return true;
 }
 
 async function getCarts(input) {
