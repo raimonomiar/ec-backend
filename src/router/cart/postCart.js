@@ -18,6 +18,12 @@ const {
   clsSession,
 } = require('../../lib/cls');
 
+const {
+  cartErrors: {
+    LIMIT_EXCEEDED,
+  },
+} = require('../../../constants/errorMaps');
+
 const addCart = async (req, res, next) => {
   try {
     const {
@@ -27,13 +33,16 @@ const addCart = async (req, res, next) => {
     } = req.body;
     const { userId } = clsSession.get(CLS_KEY_USER);
     const sessionId = await sessionService.getSessionId(userId);
-    await cartService.addCart({
+    const isCartAdded = await cartService.addCart({
       sessionId,
       productId,
       inventoryId,
       quantity,
       userId,
     });
+    if (!isCartAdded) {
+      res.status(HttpStatusCode.TOO_MANY_REQUESTS).send(LIMIT_EXCEEDED);
+    }
     res.status(HttpStatusCode.CREATED).send();
   } catch (error) {
     next(error);

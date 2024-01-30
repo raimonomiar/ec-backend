@@ -14,6 +14,7 @@ const {
   getCategory,
   updateProduct,
   deleteProduct,
+  getInventory,
   addInventory,
   updateInventory,
   deleteInventory,
@@ -136,6 +137,7 @@ const getProductWithInventory = (queryParams) => {
   } = getProduct.getQueryParamsForProductWithInventory(queryParams);
   return mysql.pool.query(selectProductWithInventoryCmd, selectProductWithInventoryArgs);
 };
+
 const updateProductInTable = (queryParams) => {
   const {
     updateProductCmd,
@@ -143,6 +145,7 @@ const updateProductInTable = (queryParams) => {
   } = updateProduct.getQueryParamsForUpdateProduct(queryParams);
   return mysql.pool.query(updateProductCmd, updateProductArgs);
 };
+
 const deleteProductFromTable = (queryParams) => {
   const {
     deleteProductNameCmd,
@@ -150,6 +153,15 @@ const deleteProductFromTable = (queryParams) => {
   } = deleteProduct.getQueryParamsForDeleteProduct(queryParams);
   return mysql.pool.query(deleteProductNameCmd, deleteProductNameArgs);
 };
+
+const getInventoryFromTable = (queryParams) => {
+  const {
+    selectInvetoryByIdCmd,
+    selectInvetoryByIdArgs,
+  } = getInventory.getQueryParamsForInventory(queryParams);
+  return mysql.pool.query(selectInvetoryByIdCmd, selectInvetoryByIdArgs);
+};
+
 const insertIntoInventoryTable = (queryParams) => {
   const {
     insertIntoInventoryCmd,
@@ -272,6 +284,7 @@ module.exports = {
   getProductWithInventory,
   updateProductInTable,
   deleteProductFromTable,
+  getInventoryFromTable,
   insertIntoInventoryTable,
   updateInventoryTable,
   deleteInventoryTable,
